@@ -1,0 +1,1 @@
+INSERT INTO stage.user VALUES (0 , 'admin' , 'admin' , 'admin' , 'admin@admin.com');
