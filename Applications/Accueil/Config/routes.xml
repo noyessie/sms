@@ -1,0 +1,5 @@
+<routes>
+	<route url="/?" module="Authentification" action="login"/>
+	<route url="^/login/?$" module="Authentification" action="login"/>
+	<route url="^/logout/?$" module="Authentification" action="logout"/>
+</routes>

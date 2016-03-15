@@ -1,8 +1,6 @@
 RewriteEngine on
-RewriteBase /stage/
+RewriteBase /sms/
 
-RewriteRule ^admin/(.*)$ index.php?app=Backend [QSA,L]
-RewriteRule ^etudiant/(.*)$ index.php?app=Frontend [QSA,L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.*)$ index.php?app=Accueil [QSA,L] 
 

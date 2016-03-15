@@ -34,7 +34,7 @@ class Page extends ApplicationComponent
 
 		
 		
-		ob_end_clean();
+		//ob_end_clean();
 
 		extract($this->vars);
 		ob_start();

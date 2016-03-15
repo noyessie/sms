@@ -6,8 +6,11 @@
 */
        namespace Library;
 
+
 class HTTPRequest extends ApplicationComponent
 {
+
+
         public function cookieData($key){
                 if(cookieExists($key)){
                     return $_COOKIE[$key];
@@ -51,7 +54,8 @@ class HTTPRequest extends ApplicationComponent
         
 
         public function requestURI(){
-                return $_SERVER['REQUEST_URI'];
+            $request = str_replace($_SERVER['REQUEST_URI'] , dirname($_SERVER['REQUEST_URI']) , '');
+            return $request;
         }
 
         public function fileExists($key){
