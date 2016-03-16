@@ -12,10 +12,14 @@ error_reporting(E_ALL);
 
 require 'Library/autoload.php';
 
+use Library\Utilities;
 $app = "Backend";
 if(isset($_GET['app']) && file_exists(__DIR__."/Applications/".$_GET['app']."/".$_GET['app']."Application.php")){
 	$app = $_GET['app'];
 }
+
+Utilities::print_table($_GET);
+
 
 
 $class = "Applications\\".$app."\\".$app."Application"; 

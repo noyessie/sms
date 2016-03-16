@@ -13,7 +13,7 @@ abstract class Application
 	protected $name;
 	protected $session;
 	protected $config;
-	protected $websiteName='stage';
+	protected $websiteName='sms';
 
 	public function __construct()
 	{
