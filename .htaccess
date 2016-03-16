@@ -1,5 +1,5 @@
 RewriteEngine on
-RewriteBase /sms/
+
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.*)$ index.php?app=Accueil [QSA,L] 
