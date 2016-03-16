@@ -1,13 +1,15 @@
 <?php
-namespace Library;
+namespace Library\Models;
 use Library\Entity;
+use Library\Manager;
+use Library\Utilities;
 /**
  * Description of Manager
  *
  * @author hubert
  */
 
-abstract class ManagerCrud extends Manager
+class ManagerCrud extends Manager
 {
 
 	protected $table_name = "";
@@ -15,8 +17,8 @@ abstract class ManagerCrud extends Manager
 	protected $mapping = array();
 
 
-	public function __construct(){
-
+	public function __construct($dao){
+		parent::__construct($dao);
 	}
 
 	/*
@@ -25,8 +27,10 @@ abstract class ManagerCrud extends Manager
 	*
 	*/
 	public function bindValue($query , Entity $entity){
-		foreach($this->$mapping as $key=>$val){
-			$query->bindValue($key , $entity[$key]);
+		foreach($this->mapping as $key=>$val){
+			if($key != 'id'){
+				$query->bindValue($key , $entity[$key]);
+			}
 		}
 		return $query;
 	}
@@ -38,11 +42,15 @@ abstract class ManagerCrud extends Manager
 	*/
 	public function map(){
 		$sql = "";
-		foreach($this->$mapping as $key=>$val){
+
+		foreach($this->mapping as $key=>$val){
 			if($key != 'id'){
-				$sql = $sql . " " . $val . " := " . $key . " ";
+				$sql = $sql . " " . $val . "=:" . $key . " ,";
 			}
 		}
+		$sql[strlen($sql)-1]=';';
+
+
 		return $sql;
 	}
 
@@ -51,7 +59,11 @@ abstract class ManagerCrud extends Manager
 	}
 
 	public function entity_class(){
-		return str_replace( $this->manager_class , 'Manager_'.$this->dao , '' );
+		$user = str_replace('Manager_PDO', '', $this->manager_class() );
+		$user = str_replace('Models' , 'Entities' , $user);
+
+		
+		return $user;
 	}
 
 	/*
@@ -61,16 +73,18 @@ abstract class ManagerCrud extends Manager
 	*/
 	public function fetch($query){
 
-		$query->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, $this->entity_class);
+		$query->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, $this->entity_class());
 		$results = $query->fetchAll();
 		return $results;
 	}
 
     public function create(Entity $entity){
 		$sql = "INSERT INTO " . $this->table_name ." SET ";
-		$sql .= map();
+		$sql .= $this->map();
 		$query = $this->dao->prepare($sql);
-		$query = bindValue($query , $entity);
+		$query = $this->bindValue($query , $entity);
+
+		Utilities::print_table($query);
 		
 		return $query->execute();
 	}
@@ -78,7 +92,7 @@ abstract class ManagerCrud extends Manager
 	public function modify(Entity $entity){
 		$sql = "INSERT INTO " . $this->table_name ." SET ";
 		$sql .= map();
-		$sql = $sql . " WHERE " . $this->$mapping['id'] . " :=id ";
+		$sql = $sql . " WHERE " . $this->mapping['id'] . " =:id ";
 		$query = $this->dao->prepare($sql);
 		$query = $this->bindValue($query , $entity);
 		
@@ -95,11 +109,15 @@ abstract class ManagerCrud extends Manager
 
 	public function find($data = array()){
 
-		$sql = "SELECT ";
+		$sql = "SELECT " . $this->mapping['id'] . " as id ";
 
-		foreach($this->$mapping as $key=>$val){
-			$sql .= $val . " as " . $key . " ";
+		foreach($this->mapping as $key=>$val){
+			if($key != 'id'){
+				$sql = $sql . " , " . $val . " as " . $key . " ";
+			}
 		}
+
+		$sql .= " FROM " . $this->table_name . " ";
 
 		if(!empty($data) &&  (isset($data['id']) || isset($data['nom']))){
 
@@ -119,7 +137,7 @@ abstract class ManagerCrud extends Manager
 		$query->execute();
 
 		
-		return $this->fetch();
+		return $this->fetch($query);
 
 	}
 

@@ -1,9 +1,8 @@
 <?php
 namespace Library\Models;
-use Library\Manager;
 use Library\Entities\SMSHasContact;
 
-class SMShasContactManager_PDO extends ManagerCRUD{
+class SMShasContactManager_PDO extends ManagerCrud{
 
 	public function __construct(){
 		$this->mapping = array(

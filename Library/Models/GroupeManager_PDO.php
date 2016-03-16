@@ -1,9 +1,8 @@
 <?php
 namespace Library\Models;
-use Library\Manager;
 use Library\Entities\Groupe;
 
-class GroupeManager_PDO extends Manager{
+class GroupeManager_PDO extends ManagerCrud{
 
 	public function __construct(){
 		$this->mapping = array(

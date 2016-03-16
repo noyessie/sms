@@ -1,9 +1,8 @@
 <?php
 namespace Library\Models;
-use Library\Manager;
 use Library\Entities\Numero;
 
-class NumeroManager_PDO extends Manager{
+class NumeroManager_PDO extends ManageCrud{
 
 
 	public function __construct(){

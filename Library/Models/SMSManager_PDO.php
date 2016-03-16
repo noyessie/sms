@@ -1,9 +1,8 @@
 <?php
 namespace Library\Models;
-use Library\Manager;
 use Library\Entities\SMS;
 
-class SMSManager_PDO extends ManagerCRUD{
+class SMSManager_PDO extends ManagerCrud{
 	public function __construct(){
 		$this->mapping = array(
 				'id'=>'idsms',

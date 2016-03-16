@@ -7,6 +7,7 @@
        namespace Library;
 
 
+
 class HTTPRequest extends ApplicationComponent
 {
 
@@ -54,7 +55,12 @@ class HTTPRequest extends ApplicationComponent
         
 
         public function requestURI(){
-            $request = str_replace($_SERVER['REQUEST_URI'] , dirname($_SERVER['REQUEST_URI']) , '');
+            $script_dir = dirname($_SERVER['SCRIPT_FILENAME']);
+            $context_document_root = $_SERVER['CONTEXT_DOCUMENT_ROOT'];
+            $path = str_replace($context_document_root , '' , $script_dir); 
+
+            
+            $request = str_replace($path , '' , $_SERVER['REQUEST_URI'] );
             return $request;
         }
 

@@ -1,9 +1,8 @@
 <?php
 namespace Library\Models;
-use Library\Manager;
 use Library\Entities\Contact;
 
-class ContactManager_PDO extends Manager{
+class ContactManager_PDO extends ManagerCrud{
 	public function __construct(){
 		$this->mapping = array(
 				'id'=>'idcontact',

@@ -1,9 +1,8 @@
 <?php
 namespace Library\Models;
-use Library\Manager;
 use Library\Entities\ContactHasGroupe;
 
-class ContactHasGroupeManager_PDO extends Manager{
+class ContactHasGroupeManager_PDO extends ManagerCrud{
 	public function __construct(){
 		$this->mapping = array(
 				'id'=>'id_contact_has_groupe',
