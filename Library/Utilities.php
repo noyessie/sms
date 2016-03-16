@@ -8,5 +8,9 @@ class Utilities{
 		print_r($data);
 		echo "</pre>";
 	}
+
+	public static function print_s($string){
+		echo "$string <br>";
+	}
 }
 
