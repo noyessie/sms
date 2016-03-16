@@ -3,32 +3,43 @@ namespace Library\Models;
 use Library\Manager;
 use Library\Entities\SMSHasContact;
 
-class SMShasContactManager_PDO extends Manager{
-	public function create(SMSHasContact $smshascontact){
+class SMShasContactManager_PDO extends ManagerCRUD{
 
+	public function __construct(){
+		$this->mapping = array(
+				'id'=>'id_sms_has_contact',
+				'sms'=>'sms_idsms',
+				'contact'=>'contact_idcontact',
+				'status'=>'etat',
+			);
+		$this->table_name = 'sms_has_contact';
 	}
 
-	public function modify(SMSHasContact $smshascontact){
-
-	}
-
-	public function delete(SMSHasContact $smshascontact){
-
-	}
-
-	public function find($data = array()){
-
-	}
-
-	public function get($id=0){
-		if(!is_numeric($id)){
-			return new SMSHasContact();
+	public function bindValue($query , Entity $entity){
+		foreach($this->$mapping as $key=>$val){
+			if($key != 'status' && $key != 'id'){
+				$query->bindValue($key , $entity[$key]['id']);
+			}else{
+				$query->bindValue($key , $entity[$key]);
+			}
 		}
-		$result = $this->find(array('id'=>$id));
-		if(count($result)>0){
-			return $result[0];
-		}else{
-			return new SMSHasContact();
+		return $query;
+	}
+
+	public function fetch($query){
+		$results = $query->fetchAll();
+		$data= array();
+		//sms manager
+		$sms_manager = new SMSManager_PDO($this->dao);
+		$contact_manager = new ContactManager_PDO($this->dao);
+		foreach($results as $r){
+			$element = new $this->entity_class();
+			$element['id'] = $r['id'];
+			$element['status']=$r['status'];
+			$element['sms'] = $sms_manager->find(array('id'=>$r['sms']));
+			$element['contact'] = $contact_manager->find(array('id'=>$r['contact']));
+			$data[] = $element;
 		}
+		return $data;
 	}
 }
