@@ -4,31 +4,24 @@ use Library\Manager;
 use Library\Entities\Contact;
 
 class ContactManager_PDO extends Manager{
-	public function create(Contact $contact){
-
-	}
-
-	public function modify(Contact $contact){
-
-	}
-
-	public function delete(Contact $Contact){
-
+	public function __construct(){
+		$this->mapping = array(
+				'id'=>'idcontact',
+				'nom'=>'nom',
+				'prenom'=>'prenom',
+				'idUser'=>'user_iduser',
+				'email'=>'adressemail',
+			)
 	}
 
 	public function find($data = array()){
+		$result = parent::find($data);
+		$numeroManager = new NumeroManager_PDO($this->dao);
 
-	}
+		for($i = 0 ; $i < count($result) ; $i++){
+			$result[i]['numeros'] = $numeroManager->find(array('idContact'=>$result[i]['id']));
+		}
 
-	public function get($id=0){
-		if(!is_numeric($id)){
-			return new Contact();
-		}
-		$result = $this->find(array('id'=>$id));
-		if(count($result)>0){
-			return $result[0];
-		}else{
-			return new Contact();
-		}
+		return $result;
 	}
 }
