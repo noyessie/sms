@@ -13,9 +13,6 @@ class AuthentificationController extends BackController{
 	}
 
 	public function executeLogout(HTTPRequest $http){
-		// $this->app()->session()->setAuthenticated(false);
-		// $this->app()->session()->setAttribute('user' , null);
-		// $this->app()->httpResponse()->redirect('login');
 		$this->page()->addVar('message', 'goodBye');
 		$this->app()->session()->destroy();
 
