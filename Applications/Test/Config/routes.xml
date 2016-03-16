@@ -1,0 +1,5 @@
+<routes>
+
+	<route url="/test/user/create/?" module="User" action="create"/>
+	<route url="/test/user/?" module="User" action="index"/>
+</routes>
