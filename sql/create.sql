@@ -24,9 +24,7 @@ CREATE TABLE IF NOT EXISTS contact(
   nom VARCHAR(45) NOT NULL,
   prenom VARCHAR(45),
   adressemail VARCHAR(200) UNIQUE,
-  user_iduser INT ,
   CONSTRAINT pk_contact PRIMARY KEY(idcontact),
-  CONSTRAINT fk_contact_userIduser_user FOREIGN KEY (user_iduser) REFERENCES user(iduser) ON DELETE SET NULL ON UPDATE CASCADE
 );
 
 
@@ -35,18 +33,14 @@ CREATE TABLE IF NOT EXISTS sms(
   corps VARCHAR(1000) NOT NULL,
   dateEnvoie TIMESTAMP,
   dateEnregistrement TIMESTAMP,
-  user_iduser INT,
   CONSTRAINT pk_sms PRIMARY KEY(idsms),
-  CONSTRAINT fk_sms_userIduser_user FOREIGN KEY (user_iduser) REFERENCES user(iduser) ON DELETE SET NULL ON UPDATE NO ACTION
 
 );
 
 CREATE TABLE IF NOT EXISTS groupe (
   idgroupe INT AUTO_INCREMENT,
   nomGroupe VARCHAR(45) NOT NULL UNIQUE,
-  user_iduser INT,
   CONSTRAINT pk_groupe PRIMARY KEY(idgroupe),
-  CONSTRAINT fk_groupe_userIduser_user FOREIGN KEY (user_iduser) REFERENCES user(iduser) ON DELETE SET NULL ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS numero (

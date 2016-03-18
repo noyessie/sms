@@ -10,7 +10,6 @@ class Contact extends Entity{
 
     protected $email;
 
-    protected $idUser;
 
     protected $numeros = array();
 
@@ -89,29 +88,6 @@ class Contact extends Entity{
         return $this;
     }
 
-    /**
-     * Gets the value of idUser.
-     *
-     * @return mixed
-     */
-    public function getIdUser()
-    {
-        return $this->idUser;
-    }
-
-    /**
-     * Sets the value of idUser.
-     *
-     * @param mixed $idUser the id user
-     *
-     * @return self
-     */
-    protected function setIdUser($idUser)
-    {
-        $this->idUser = $idUser;
-
-        return $this;
-    }
 
     /**
      * Gets the value of numeros.

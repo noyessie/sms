@@ -14,8 +14,6 @@ class SMS extends Entity{
 
     protected $dateEnregistrement;
 
-    protected $idUser;
-
 
 
 

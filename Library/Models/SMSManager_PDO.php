@@ -9,7 +9,6 @@ class SMSManager_PDO extends ManagerCrud{
 				'corps'=>'corps',
 				'dateEnvoie'=>'dateEnvoie',
 				'dateEnregistrement'=>'dateEnregistrement',
-				'idUser'=>'user_iduser',
 			)
 		$this->table_name = "sms";
 	}
