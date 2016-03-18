@@ -1,6 +1,5 @@
 <<form action="" method="post" accept-charset="utf-8">
 	<input type="hidden" name = "create"/>
-	<input type="text" name="unknow_contact"/>
 	<select name="groupe" id="">
 		<?php foreach($groupes as $g):?>
 			<option value="<?=$g['nom']?>"><?=$g['nom']?></option>

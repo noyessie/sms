@@ -3,7 +3,11 @@ namespace Applications\Test\Modules\SMS;
 use Library\BackController;
 use Library\HTTPRequest;
 use Library\Entities\SMS;
+use Library\Entities\Contact;
+use Library\Entities\ContactHasGroupe;
+
 use Library\Utilities;
+
 
 class SMSController extends BackController{
 	
@@ -17,17 +21,39 @@ class SMSController extends BackController{
 		if($http->postExists('create')){
 			$manager = $this->managers->getManagerOf('SMS');
 			$managerContact = $this->managers->getManagerOf('Contact');
+			$managerContactHasGroupe = $this->managers->getManagerOf('ContactHasGroupe');
 			$sms = new Sms();
 
 			$sms['corps'] = $http->postData('message');
-			$groupes = $http->postData('groupe');
+			//contacts auqeuls envoyer les messages
+			$contacts = array();
+			//le groupe choisit pas l'utilisateur
+			$groupe = $http->postData('groupe');
+			
+
+			//contact correspondant au groupe
+			if($groupe = 'public'){
+				$contacts = $managerContact->find();
+			}else{
+				$contactHasGroupe = $managerContactHasGroupe->find(array('groupe'=>$groupe));
+				foreach($contactHasGroupe as $contacthasg){
+					array_push($contacts , $contacthasg['contact']);
+				}
+			}
+
+			Utilities::print_table($contacts);
+
+			//creation du message
+
+
+
+
 
 			$manager->create($sms);
-			$user = $managerUser->find()[0];
+			
 
 
-
-			$this->app()->httpResponse()->redirect('test/message/');
+			//$this->app()->httpResponse()->redirect('test/message/');
 		}
 
 		$groupes = $this->managers->getManagerOf('Groupe')->find();
