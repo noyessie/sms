@@ -5,6 +5,7 @@ namespace Applications\Accueil\Modules\Creation;
 use Library\BackController;
 use Library\HTTPRequest;
 use Library\Controls;
+use Library\Config;
 use Library\Entities\Groupe;
 use Library\Entities\ContactHasGroupe;
 use Library\Entities\Contact;
@@ -45,7 +46,7 @@ class CreationController extends BackController {
             $group = new Groupe();
 
             $group['nom'] = $http->postData('groupe');
-            $group['idUser'] = 1;
+           // $group['idUser'] = 1;
             var_dump($group);
             var_dump($manager);
             $manager->create($group);
@@ -115,10 +116,11 @@ class CreationController extends BackController {
     public function executeUploadercontacts(HTTPRequest $http) {
         $fichier = new Fichier();
         //on uploade le fichier
-        $nombre=count($fichier->listeFichierRepertoire('C:/wamp/www/sms/Applications/Accueil/Modules/Creation/Files/'));
+        $config=new Config();
+        $nombre=count($fichier->listeFichierRepertoire($config->get('cheminDossierReception')));
         $nombre++;
         $upload = new Upload();
-        $resultUpload = $upload->uploaderGeneral('C:/wamp/www/sms/Applications/Accueil/Modules/Creation/Files/', 'contacts'.$nombre.'.csv');
+        $resultUpload = $upload->uploaderGeneral($config->get('cheminDossierReception'), $config->get('nomFichier').$nombre.'.csv');
         $erreur = '';
         //puis on enregistre les elements dans la bd
         if ($resultUpload) {
@@ -130,7 +132,7 @@ class CreationController extends BackController {
             $forme[] = 'numero1';
             $forme[] = 'numero2';
             $forme[] = 'numero3';
-            $result = $fichier->traiteFichier('C:/wamp/www/sms/Applications/Accueil/Modules/Creation/Files/contacts'.$nombre.'.csv', $forme);
+            $result = $fichier->traiteFichier($config->get('cheminDossierReception').$config->get('nomFichier').$nombre.'.csv', $forme);
             //on passe a la validation tous les champs de tous les contacts
             var_dump($result);
             $flag = false;
@@ -154,12 +156,12 @@ class CreationController extends BackController {
                 {
                     $contactTo['numero3']=$elem['numero3'];
                 }
-                if(isset($http->postData('groupeUpload')))
+                if($http->postExists('groupeUpload'))
                 {
                     $contactTo['groupe']=$http->postData('groupeUpload');
                 }else
                 {
-                    $contactTo['groupe']=$http->postData('inputAutreGroupeUpload');
+                    $contactTo['groupe']=$http->postData('inputAutreUploadGroupe');
                 }
                 
                 $this->saveContact($contactTo);
@@ -220,7 +222,7 @@ class CreationController extends BackController {
         $contact['nom'] = $contactTo['nom'];
         $contact['prenom'] = $contactTo['prenom'];
         $contact['email'] = $contactTo['email'];
-        $contact['idUser'] = 1;
+       // $contact['idUser'] = 1;
         $numero = array();
         if (isset($contactTo['numero1'])) {
             $numero[] = $contactTo['numero1'];;
@@ -239,7 +241,7 @@ class CreationController extends BackController {
         $contacthasgroupe['contact'] = $contact;
         $group = new Groupe();
         $group['nom']=$contactTo['groupe'];
-        $group['idUser'] = 1;
+        //$group['idUser'] = 1;
         $contacthasgroupe['groupe'] = $group;
         $manager->create($contacthasgroupe);
     }

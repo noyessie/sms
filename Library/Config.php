@@ -5,7 +5,6 @@ namespace Library;
  *
  * @author hubert
  */
-
  
 class Config extends ApplicationComponent
 {

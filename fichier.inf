@@ -1,4 +1,0 @@
-user a6698046 000webhost
-cd /public_html 
-put C:\wamp\www\sql3.sql sql3.sql
-quit

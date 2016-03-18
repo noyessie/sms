@@ -43,19 +43,19 @@ abstract class Application
                                 //print_r($vars);
                                 //echo "<br>";
 			}
-                         var_dump($route->getAttribute('url'));
-                         var_dump($vars);
+                         //var_dump($route->getAttribute('url'));
+                         //var_dump($vars);
                         //On ajoute la route au routeur
 			$router->addRout(new Route($route->getAttribute('url') , $route->getAttribute('module') , $route->getAttribute('action') , $vars));
 		}
                 var_dump($router->getRoute($this->httpRequest->requestURI()));
 		try{
 			//on récupère la route correspondante à l'url
-			echo "l'url que je resoit c'est  <br>"; 
-			var_dump($router->getRoute($this->httpRequest->requestURI()));
+			//echo "l'url que je resoit c'est  <br>"; 
+			//var_dump($router->getRoute($this->httpRequest->requestURI()));
                         $matchedRoute = $router->getRoute($this->httpRequest->requestURI());
 			//echo
-                        echo "ça correspond a la reponse <br>";
+                        //echo "ça correspond a la reponse <br>";
 		}catch(\RuntimeException $e){
 			if($e->getCode() == \Library\Router::NO_ROUTE){
 				echo " ça ne correspond a aucune routes <br>";
