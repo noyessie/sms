@@ -23,6 +23,21 @@ class Controls {
         return $erreurs=="";
     }
     /**
+     * methode de test pour le tableau d'erreurs
+     */
+    public function estVideTab($erreurs)
+    {
+             foreach($erreurs as $cle => $element)
+        {
+            if($element!='')
+            {
+                return false;
+            }
+        }
+        return true;
+   
+    }
+    /**
      * methode de validation du matricule
      */
     public function validationMatricule($matricule)
@@ -92,5 +107,17 @@ class Controls {
         return $message;
     }
     
-        
+    /**
+     * methode de validation des numeros de telephone
+     */
+    public function validationNumTel($code, $tel)
+    {
+        $nombre = htmlspecialchars($tel);
+        $message="";
+        if (!preg_match('#'.$code.'[0-9]*$'.'#',$nombre)||(!preg_match('#^[0-9]*$#',$nombre)))
+        {
+            $message= 'Veuillez entrer un numéro de téléphone valide!';
+        }
+        return $message;
+    }
 }

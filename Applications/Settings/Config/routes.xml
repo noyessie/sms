@@ -1,0 +1,4 @@
+<routes>
+    <route url="/settings/params/change/?" module="Params" action="change"/>
+    <route url="/settings/params/index/?" module="Params" action="index"/>
+</routes>

@@ -27,6 +27,7 @@ abstract class Application
 	public function getController(){
 		$router = new \Library\Router;
 		$xml = new \DOMDocument;
+                echo 'nom du controleur '.  $this->name;
 		$xml->load(__DIR__.'/../Applications/'.$this->name.'/Config/routes.xml');
 		$routes = $xml->getElementsByTagName('route');
 
@@ -42,16 +43,19 @@ abstract class Application
                                 //print_r($vars);
                                 //echo "<br>";
 			}
-
-			//On ajoute la route au routeur
+                         var_dump($route->getAttribute('url'));
+                         var_dump($vars);
+                        //On ajoute la route au routeur
 			$router->addRout(new Route($route->getAttribute('url') , $route->getAttribute('module') , $route->getAttribute('action') , $vars));
 		}
-
+                var_dump($router->getRoute($this->httpRequest->requestURI()));
 		try{
 			//on récupère la route correspondante à l'url
-			echo "l'url que je resoit c'est " . $this->httpRequest->requestURI() . "<br>"; 
-			$matchedRoute = $router->getRoute($this->httpRequest->requestURI());
-			echo "ça correspond a la reponse <br>";
+			echo "l'url que je resoit c'est  <br>"; 
+			var_dump($router->getRoute($this->httpRequest->requestURI()));
+                        $matchedRoute = $router->getRoute($this->httpRequest->requestURI());
+			//echo
+                        echo "ça correspond a la reponse <br>";
 		}catch(\RuntimeException $e){
 			if($e->getCode() == \Library\Router::NO_ROUTE){
 				echo " ça ne correspond a aucune routes <br>";
@@ -62,7 +66,7 @@ abstract class Application
 		//on ajoute les variables de l'URL au tableau $_GET.
                 //print_r($matchedRoute->vars());
 		$_GET = array_merge($_GET , $matchedRoute->vars());
-
+                  
 		//On instancie le controleur.
 		$controllerClass = 'Applications\\'.$this->name.'\\Modules\\'.$matchedRoute->module().'\\'.$matchedRoute->module().'Controller';
 

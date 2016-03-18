@@ -1,6 +1,14 @@
 <routes>
 	<route url="/?" module="Authentification" action="login"/>
 	<route url="^/login/?$" module="Authentification" action="login"/>
-        <route url="^/settings/?$" module="Settings" action="settings"/>
-	<route url="^/logout/?$" module="Authentification" action="logout"/>
+        <route url="^/verification/?$" module="Authentification" action="verification"/>
+        <route url="^/logout/?$" module="Authentification" action="logout"/>
+        <route url="/sms/acceuil/creation/groupe/?" module="Creation" action="creergroupe"/>
+        <route url="/sms/acceuil/creation/contact/?" module="Creation" action="creercontact"/>
+        <route url="/acceuil/creation/index/?" module="Creation" action="index"/>
+        <route url="/acceuil/creation/groupe/?" module="Creation" action="creergroupe"/>
+        <route url="/acceuil/creation/contact/?" module="Creation" action="creercontact"/>
+        <route url="/creation/index/?" module="Creation" action="index"/>
+        <route url="/creation/groupe/?" module="Creation" action="creergroupe"/>
+        <route url="/creation/contact/?" module="Creation" action="creercontact"/>
 </routes>

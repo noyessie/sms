@@ -4,7 +4,8 @@ use Library\Entities\SMSHasContact;
 
 class SMShasContactManager_PDO extends ManagerCrud{
 
-	public function __construct(){
+	public function __construct($dao){
+                parent::__construct($dao);
 		$this->mapping = array(
 				'id'=>'id_sms_has_contact',
 				'sms'=>'sms_idsms',

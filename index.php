@@ -21,7 +21,7 @@ if(isset($_GET['app']) && file_exists(__DIR__."/Applications/".$_GET['app']."/".
 Utilities::print_table($_GET);
 
 
-
+echo 'la classe est '.$app;
 $class = "Applications\\".$app."\\".$app."Application"; 
 
 

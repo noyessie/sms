@@ -31,7 +31,10 @@ class HTTPRequest extends ApplicationComponent
                     throw new \Exception("attribut '$key' does not exist in GET data");
                 }
         }
-
+        public function getPost()
+        {
+            return $_POST;
+        }
         public function getExists($key){
                 return isset($_GET[$key]);
         }

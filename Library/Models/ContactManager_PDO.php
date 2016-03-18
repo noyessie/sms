@@ -3,14 +3,15 @@ namespace Library\Models;
 use Library\Entities\Contact;
 
 class ContactManager_PDO extends ManagerCrud{
-	public function __construct(){
+	public function __construct($dao){
+                parent::__construct($dao);
 		$this->mapping = array(
 				'id'=>'idcontact',
 				'nom'=>'nom',
 				'prenom'=>'prenom',
 				'idUser'=>'user_iduser',
 				'email'=>'adressemail',
-			)
+			);
 	}
 
 	public function find($data = array()){
