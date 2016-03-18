@@ -11,6 +11,7 @@ class ContactManager_PDO extends ManagerCrud{
 				'idUser'=>'user_iduser',
 				'email'=>'adressemail',
 			)
+		$this->table_name = "contact";
 	}
 
 	public function find($data = array()){

@@ -1,6 +1,8 @@
 <?php
 namespace Library\Entities;
 use Library\Entity;
+use Library\Entities\Contact;
+use Library\Entities\SMS;
 
 class SMSHasContact extends Entity{
 	protected $contact;
@@ -28,7 +30,7 @@ class SMSHasContact extends Entity{
      *
      * @return self
      */
-    protected function setContact($contact)
+    protected function setContact(Contact $contact)
     {
         $this->contact = $contact;
 
@@ -52,7 +54,7 @@ class SMSHasContact extends Entity{
      *
      * @return self
      */
-    protected function setSms($sms)
+    protected function setSms(SMS $sms)
     {
         $this->sms = $sms;
 

@@ -9,6 +9,7 @@ class ContactHasGroupeManager_PDO extends ManagerCrud{
 				'groupe'=>'groupe_idcontact',
 				'contact'=>'contact_idcontact',
 			)
+		$this->table_name = "contact_has_groupe";
 	}
 
 

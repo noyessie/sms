@@ -100,7 +100,7 @@ class ManagerCrud extends Manager
 	}
 
 	public function delete(Entity $entity){
-		$sql = "DELETE FROM " . $this->table_name . " WHERE " . $this->$mapping['id'] . "=:id";
+		$sql = "DELETE FROM " . $this->table_name . " WHERE " . $this->mapping['id'] . "=:id";
 		$query = $this->dao->prepare($sql);
 		$query->bindValue('id' , $entity['id']);
 
@@ -123,7 +123,7 @@ class ManagerCrud extends Manager
 
 			$sql .= " WHERE TRUE ";
 			foreach($data as $key=>$d){
-				$sql .= " AND ". $this->$maping[$key] ."=:".$key." ";
+				$sql .= " AND ". $this->mapping[$key] ."=:".$key." ";
 			}
 		}
 		$sql .=";";
