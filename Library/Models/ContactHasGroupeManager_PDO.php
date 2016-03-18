@@ -13,6 +13,7 @@ class ContactHasGroupeManager_PDO extends ManagerCrud{
 		$this->table_name = "contact_has_groupe";
 	}
 
+	
 
 	public function bindValue($query , Entity $entity){
 		foreach($this->mapping as $key=>$val){

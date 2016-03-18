@@ -8,8 +8,7 @@ class SMSManager_PDO extends ManagerCrud{
 		$this->mapping = array(
 				'id'=>'idsms',
 				'corps'=>'corps',
-				'dateEnvoie'=>'dateEnvoie',
-				'dateEnregistrement'=>'dateEnregistrement'
+				'dateEnregistrement'=>'dateEnregistrement',
 			);
 		$this->table_name = "sms";
 	}

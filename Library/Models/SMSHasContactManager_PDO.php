@@ -11,7 +11,7 @@ class SMShasContactManager_PDO extends ManagerCrud{
 				'sms'=>'sms_idsms',
 				'contact'=>'contact_idcontact',
 				'status'=>'etat',
-				'dateEnregistrement'=>'dateEnregistrement',
+				'dateEnvoie'=>'dateEnvoie',
 			);
 		$this->table_name = 'sms_has_contact';
 	}
