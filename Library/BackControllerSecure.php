@@ -18,5 +18,7 @@ abstract class BackControllerSecure extends BackController{
 	*	this action is executed when the user is not logged. 
 	* 	you cant redirect it for another page or display a 403 page 
 	**/
-	abstract function executeNotLogged(HTTPRequest $http);
+	public function executeNotLogged(HTTPRequest $http){
+		$this->app()->httpResponse()->redirect('/login');
+	}
 }

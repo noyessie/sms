@@ -3,9 +3,10 @@ namespace Applications\Test\Modules\Contact;
 use Library\BackController;
 use Library\HTTPRequest;
 use Library\Entities\Contact;
+use Library\Entities\Numero;
 use Library\Utilities;
 
-class ContactController extends BackController{
+class ContactController extends BackControllerSecure{
 	
 	public function executeIndex(HTTPRequest $http){
 		$manager = $this->managers->getManagerOf('Contact');
@@ -17,15 +18,25 @@ class ContactController extends BackController{
 
 		if($http->postExists('create')){
 			$manager = $this->managers->getManagerOf('Contact');
+			$numeroManager = $this->managers->getManagerOf('Numero');
 			$contact = new Contact();
 
 			$contact['nom'] = $http->postData('nom');
 			$contact['prenom'] = $http->postData('prenom');
 			$contact['email'] = $http->postData('email');
-			
-			//$numero = $http->postData('contact');
+			$id = $manager->create($contact);
 
-			$manager->create($contact);
+			
+			$numeros = $http->postData('numeros');
+
+			Utilities::print_table($numeros);
+			foreach($numeros as $numero){
+				$num = new Numero();
+				$num['idContact'] = $id;
+				$num['numero'] = $numero;
+				$numeroManager->create($num);
+			}
+
 			$this->app()->httpResponse()->redirect('test/contact/');
 		}
 	}

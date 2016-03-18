@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<definitions>
+	<define var="user_name" value="hubert"/>
+	<define var="password" value="hubert"/>
+</definitions>

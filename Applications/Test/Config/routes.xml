@@ -9,4 +9,16 @@
 	<route url="/test/contact/([0-9]+)/delete/" module="Contact" action="delete" vars="id"/>
 	<route url="/test/contact/" module="Contact" action="index"/>
 	<route url="/test/contact/search/" module="Contact" action="index"/>
+
+<!-- routes pour teste les numero -->
+	<route url="/test/numero/create/" module="Numero" action="create"/>
+	<route url="/test/numero/([0-9]+)/delete/" module="Numero" action="delete" vars="id"/>
+	<route url="/test/numero/" module="Numero" action="index"/>
+	<route url="/test/numero/search/" module="Numero" action="index"/>
+
+<!-- routes pour teste les numero -->
+	<route url="/test/message/create/" module="SMS" action="create"/>
+	<route url="/test/message/([0-9]+)/delete/" module="SMS" action="delete" vars="id"/>
+	<route url="/test/message/" module="SMS" action="index"/>
+	<route url="/test/message/search/" module="SMS" action="index"/>
 </routes>

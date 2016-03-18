@@ -10,7 +10,6 @@ class SMS extends Entity{
 	
     protected $corps;
 
-    protected $dateEnvoie;
 
     protected $dateEnregistrement;
 
@@ -42,29 +41,7 @@ class SMS extends Entity{
         return $this;
     }
 
-    /**
-     * Gets the value of dateEnvoie.
-     *
-     * @return mixed
-     */
-    public function getDateEnvoie()
-    {
-        return $this->dateEnvoie;
-    }
-
-    /**
-     * Sets the value of dateEnvoie.
-     *
-     * @param mixed $dateEnvoie the date envoie
-     *
-     * @return self
-     */
-    protected function setDateEnvoie($dateEnvoie)
-    {
-        $this->dateEnvoie = $dateEnvoie;
-
-        return $this;
-    }
+    
 
     /**
      * Gets the value of dateEnregistrement.
@@ -90,27 +67,4 @@ class SMS extends Entity{
         return $this;
     }
 
-    /**
-     * Gets the value of idUser.
-     *
-     * @return mixed
-     */
-    public function getIdUser()
-    {
-        return $this->idUser;
-    }
-
-    /**
-     * Sets the value of idUser.
-     *
-     * @param mixed $idUser the id user
-     *
-     * @return self
-     */
-    protected function setIdUser($idUser)
-    {
-        $this->idUser = $idUser;
-
-        return $this;
-    }
 }

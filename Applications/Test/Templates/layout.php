@@ -4,7 +4,11 @@
 		input{
 			display: block;
 		}	
+
 	</style>
+
+	<link rel="stylesheet" href="/sms/Web/css/style.css">
+	<link rel="stylesheet" href="Web/css/accueil/accueil.css">
 	<head>
 		<title><?= isset($title) ? $title : 'Backend' ?></title>
 		<meta charset="utf-8">

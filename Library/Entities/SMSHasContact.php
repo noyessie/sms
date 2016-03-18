@@ -11,6 +11,8 @@ class SMSHasContact extends Entity{
 
     protected $status;
 
+    protected $dateEnvoie;
+
     
 
     /**
@@ -81,6 +83,30 @@ class SMSHasContact extends Entity{
     protected function setStatus($status)
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of dateEnvoie.
+     *
+     * @return mixed
+     */
+    public function getDateEnvoie()
+    {
+        return $this->dateEnvoie;
+    }
+
+    /**
+     * Sets the value of dateEnvoie.
+     *
+     * @param mixed $dateEnvoie the date envoie
+     *
+     * @return self
+     */
+    protected function setDateEnvoie($dateEnvoie)
+    {
+        $this->dateEnvoie = $dateEnvoie;
 
         return $this;
     }
