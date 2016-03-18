@@ -1,4 +1,6 @@
 
+create database mydb;
+use mydb;
 -- Table User
 
 #-- creation de la table user

@@ -6,7 +6,7 @@ use Library\Entities\Contact;
 use Library\Entities\Numero;
 use Library\Utilities;
 
-class ContactController extends BackControllerSecure{
+class ContactController extends BackController{
 	
 	public function executeIndex(HTTPRequest $http){
 		$manager = $this->managers->getManagerOf('Contact');
