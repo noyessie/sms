@@ -1,0 +1,93 @@
+body{
+	border:0;
+	text-align: left;
+	background-image: url('../../images/back.jpg');
+}
+
+nav{
+	display:table-row !important;
+	/*background-color: #F6F6F6;*/
+}
+
+
+
+.titre{
+	width:150px;
+	vertical-align: middle;
+	display:table-cell;
+	width:94%;
+	font-size:4em;
+	color:#36C;
+	margin:0px;
+	padding-left: 10px;
+}
+
+.connection{
+	display: table-cell;
+	vertical-align: middle;
+	width:100%;
+	padding-right:15px;
+	color:white;
+}
+
+#my_carousel{
+	width:100%;
+	max-height: 600px;
+	overflow:hidden;
+}
+
+.item{
+	vertical-align: center;
+}
+
+.carousel-caption{
+	position:absolute;
+	top:30%;
+}
+
+.full{
+	width:100%;
+	height:100%;
+}
+
+.contenue{
+	width:70%;
+	height: 800px;
+	display:table;
+	margin:0 auto;
+	text-align:center;
+	/*background-color: #F6F6F6;*/
+}
+
+.contenue > div{
+	display: table-cell;
+	vertical-align: middle;
+	margin:0 auto;
+	text-align:center;
+}
+footer{
+	color:#36C;
+}
+
+
+/*Formulaire de connection*/
+
+#login *{
+	border-radius: 0;
+}
+
+#login > *{
+	width:50%;
+	margin:0 auto;
+}
+
+
+
+.element > input{
+	display: table-cell;
+	width:100%;
+}
+
+
+
+
