@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS numero (
   numero VARCHAR(100) NOT NULL UNIQUE,
   contact_idcontact INT ,
   CONSTRAINT pk_numero PRIMARY KEY(idnumero),
-  CONSTRAINT fk_numero_contactIdcontact_contact FOREIGN KEY (contact_idcontact) REFERENCES contact(idcontact) ON DELETE SET NULL  ON UPDATE CASCADE
+  CONSTRAINT fk_numero_contactIdcontact_contact FOREIGN KEY (contact_idcontact) REFERENCES contact(idcontact) ON DELETE CASCADE ON UPDATE CASCADE
 
 );
 

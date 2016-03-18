@@ -19,7 +19,7 @@ class ContactManager_PDO extends ManagerCrud{
 		$numeroManager = new NumeroManager_PDO($this->dao);
 
 		for($i = 0 ; $i < count($result) ; $i++){
-			$result[i]['numeros'] = $numeroManager->find(array('idContact'=>$result[i]['id']));
+			$result[$i]['numeros'] = $numeroManager->find(array('idContact'=>$result[$i]['id']));
 		}
 
 		return $result;
