@@ -15,10 +15,8 @@ class ContactHasGroupeManager_PDO extends ManagerCrud{
 
 
 	public function bindValue($query , Entity $entity){
-		foreach($this->$mapping as $key=>$val){
+		foreach($this->mapping as $key=>$val){
 			if($key != 'id'){
-				$query->bindValue($key , $entity[$key]['id']);
-			}else{
 				$query->bindValue($key , $entity[$key]);
 			}
 		}
