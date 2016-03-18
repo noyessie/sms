@@ -1,4 +1,4 @@
-<form method="post" action="/sms/login">
+<form method="post" action="/stage/login">
 	<div class="element">
 		<label for="login">Login</label>
 		<input type="text" name="login">

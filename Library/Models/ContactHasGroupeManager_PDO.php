@@ -4,12 +4,13 @@ use Library\Entities\ContactHasGroupe;
 
 class ContactHasGroupeManager_PDO extends ManagerCrud{
 	public function __construct($dao){
-                parent::__construct($dao);
+		parent::__construct($dao);
 		$this->mapping = array(
 				'id'=>'id_contact_has_groupe',
 				'groupe'=>'groupe_idcontact',
 				'contact'=>'contact_idcontact',
 			);
+		$this->table_name = "contact_has_groupe";
 	}
 
 

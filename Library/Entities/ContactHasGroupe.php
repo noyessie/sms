@@ -1,6 +1,8 @@
 <?php
 namespace Library\Entities;
 use Library\Entity;
+use Library\Entities\Groupe;
+use Library\Entities\Contact;
 
 class ContactHasGroupe extends Entity{
 	protected $groupe;
@@ -26,7 +28,7 @@ class ContactHasGroupe extends Entity{
      *
      * @return self
      */
-    protected function setGroupe($groupe)
+    protected function setGroupe(Groupe $groupe)
     {
         $this->groupe = $groupe;
 
@@ -50,7 +52,7 @@ class ContactHasGroupe extends Entity{
      *
      * @return self
      */
-    protected function setContact($contact)
+    protected function setContact(Contact $contact)
     {
         $this->contact = $contact;
 

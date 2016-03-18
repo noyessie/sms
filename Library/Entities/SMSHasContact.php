@@ -1,6 +1,8 @@
 <?php
 namespace Library\Entities;
 use Library\Entity;
+use Library\Entities\Contact;
+use Library\Entities\SMS;
 
 class SMSHasContact extends Entity{
 	protected $contact;
@@ -8,6 +10,8 @@ class SMSHasContact extends Entity{
     protected $sms;
 
     protected $status;
+
+    protected $dateEnvoie;
 
     
 
@@ -28,7 +32,7 @@ class SMSHasContact extends Entity{
      *
      * @return self
      */
-    protected function setContact($contact)
+    protected function setContact(Contact $contact)
     {
         $this->contact = $contact;
 
@@ -52,7 +56,7 @@ class SMSHasContact extends Entity{
      *
      * @return self
      */
-    protected function setSms($sms)
+    protected function setSms(SMS $sms)
     {
         $this->sms = $sms;
 
@@ -79,6 +83,30 @@ class SMSHasContact extends Entity{
     protected function setStatus($status)
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of dateEnvoie.
+     *
+     * @return mixed
+     */
+    public function getDateEnvoie()
+    {
+        return $this->dateEnvoie;
+    }
+
+    /**
+     * Sets the value of dateEnvoie.
+     *
+     * @param mixed $dateEnvoie the date envoie
+     *
+     * @return self
+     */
+    protected function setDateEnvoie($dateEnvoie)
+    {
+        $this->dateEnvoie = $dateEnvoie;
 
         return $this;
     }

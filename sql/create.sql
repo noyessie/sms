@@ -1,9 +1,3 @@
--- Script de créatin de la base de donnée
-
-
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
-USE `mydb` ;
-
 
 -- Table User
 
@@ -24,29 +18,22 @@ CREATE TABLE IF NOT EXISTS contact(
   nom VARCHAR(45) NOT NULL,
   prenom VARCHAR(45),
   adressemail VARCHAR(200) UNIQUE,
-  user_iduser INT ,
-  CONSTRAINT pk_contact PRIMARY KEY(idcontact),
-  CONSTRAINT fk_contact_userIduser_user FOREIGN KEY (user_iduser) REFERENCES user(iduser) ON DELETE SET NULL ON UPDATE CASCADE
+  CONSTRAINT pk_contact PRIMARY KEY(idcontact)
 );
 
 
 CREATE TABLE IF NOT EXISTS sms(
   idsms INT AUTO_INCREMENT,
   corps VARCHAR(1000) NOT NULL,
-  dateEnvoie TIMESTAMP,
   dateEnregistrement TIMESTAMP,
-  user_iduser INT,
-  CONSTRAINT pk_sms PRIMARY KEY(idsms),
-  CONSTRAINT fk_sms_userIduser_user FOREIGN KEY (user_iduser) REFERENCES user(iduser) ON DELETE SET NULL ON UPDATE NO ACTION
+  CONSTRAINT pk_sms PRIMARY KEY(idsms)
 
 );
 
 CREATE TABLE IF NOT EXISTS groupe (
   idgroupe INT AUTO_INCREMENT,
   nomGroupe VARCHAR(45) NOT NULL UNIQUE,
-  user_iduser INT,
-  CONSTRAINT pk_groupe PRIMARY KEY(idgroupe),
-  CONSTRAINT fk_groupe_userIduser_user FOREIGN KEY (user_iduser) REFERENCES user(iduser) ON DELETE SET NULL ON UPDATE CASCADE
+  CONSTRAINT pk_groupe PRIMARY KEY(idgroupe)
 );
 
 CREATE TABLE IF NOT EXISTS numero (
@@ -54,7 +41,7 @@ CREATE TABLE IF NOT EXISTS numero (
   numero VARCHAR(100) NOT NULL UNIQUE,
   contact_idcontact INT ,
   CONSTRAINT pk_numero PRIMARY KEY(idnumero),
-  CONSTRAINT fk_numero_contactIdcontact_contact FOREIGN KEY (contact_idcontact) REFERENCES contact(idcontact) ON DELETE SET NULL  ON UPDATE CASCADE
+  CONSTRAINT fk_numero_contactIdcontact_contact FOREIGN KEY (contact_idcontact) REFERENCES contact(idcontact) ON DELETE CASCADE ON UPDATE CASCADE
 
 );
 
@@ -73,6 +60,7 @@ CREATE TABLE IF NOT EXISTS sms_has_contact(
   sms_idsms INT NOT NULL,
   contact_idcontact INT NOT NULL,
   etat VARCHAR(10),
+  dateEnvoie TIMESTAMP,
   CONSTRAINT pk_sms_has_contact PRIMARY KEY(id_sms_has_contact),
   CONSTRAINT fk_smsHasContact_smsIdsms_sms FOREIGN KEY (sms_idsms) REFERENCES sms(idsms) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT fk_smsHasContact_contactIdcontact_contact FOREIGN KEY (contact_idcontact) REFERENCES contact(idcontact) ON DELETE CASCADE ON UPDATE CASCADE

@@ -86,7 +86,8 @@ class ManagerCrud extends Manager
 
 		Utilities::print_table($query);
 		
-		return $query->execute();
+		$id =  $query->execute() ? $this->dao->lastInsertId() : 0;
+		return $id;
 	}
 
 	public function modify(Entity $entity){
@@ -100,7 +101,7 @@ class ManagerCrud extends Manager
 	}
 
 	public function delete(Entity $entity){
-		$sql = "DELETE FROM " . $this->table_name . " WHERE " . $this->$mapping['id'] . "=:id";
+		$sql = "DELETE FROM " . $this->table_name . " WHERE " . $this->mapping['id'] . "=:id";
 		$query = $this->dao->prepare($sql);
 		$query->bindValue('id' , $entity['id']);
 
@@ -119,17 +120,20 @@ class ManagerCrud extends Manager
 
 		$sql .= " FROM " . $this->table_name . " ";
 
-		if(!empty($data) &&  (isset($data['id']) || isset($data['nom']))){
+		if(!empty($data)){
 
 			$sql .= " WHERE TRUE ";
 			foreach($data as $key=>$d){
-				$sql .= " AND ". $this->$maping[$key] ."=:".$key." ";
+				if(isset($this->mapping[$key])){
+					$sql .= " AND ". $this->mapping[$key] ."=:".$key." ";
+				}
 			}
 		}
 		$sql .=";";
 
 
-
+		Utilities::print_s("find query  : " );
+		Utilities::print_s($sql);
 		$query = $this->dao->prepare($sql);
 		foreach($data as $key=>$d){
 			$query->bindValue($key , $d);
