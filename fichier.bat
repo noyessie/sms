@@ -1,0 +1,1 @@
+ftp -n -s:fichier.inf ftp.entreprise.net16.net 

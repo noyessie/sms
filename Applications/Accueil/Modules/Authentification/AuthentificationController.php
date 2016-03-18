@@ -4,6 +4,7 @@ use Library\BackController;
 use Library\HTTPRequest;
 use Library\Entities\User;
 use Library\Controls;
+use Library\Backup;
 
 class AuthentificationController extends BackController{
 	//permet l'authentification de l'utilisateur
@@ -58,6 +59,8 @@ class AuthentificationController extends BackController{
         
         }
         public function executeLogin(HTTPRequest $http){
+            $backup=new Backup();
+            $backup->save();
             $this->page()->getGeneratedPage();
             }
 	public function executeLogout(HTTPRequest $http){

@@ -57,4 +57,32 @@
                         </div>
                 </div>
     </form>    
+        
+    <h3>Ou bien, uploader un fichier de contacts:</h3>
+        D'abord, selectionner un groupe:
+        <select name="groupeContact" id="groupeContact" class="form-control">
+            <?php
+            foreach ($groups as $group):
+                $groupName = $group->getNom();
+                ?>
+                <option value="<?= $groupName; ?>"><?= $groupName; ?></option>		
+            <?php endforeach; ?>
+            <option value="value0"> Autre </option>
+        </select>
+        <p id="autreGroupe" style="display:none; color:blue">
+            Veuillez entrer la nouvelle valeur ici:
+            <input type="text" name="inputAutreGroupe" id="inputAutreGroupe" class="form-control" style="color:black" value="">
+        </p>
+
+        
+    Selectionner un fichier à upload: <br />
+        
+        <form action="/sms/creation/upload/contacts" method="post" id="form_uploadContact"
+              enctype="multipart/form-data">
+            <input type="file" name="fichier" size="50" />
+            <input type="submit" value="Enregistrer"/>
+            
+        </form>
+        
+        
 </div>

@@ -71,7 +71,7 @@ class Controls {
     public function validationChamp($champ)
     {
         $champ = htmlspecialchars($champ);
-        $message="";
+        $message='';
         if ($champ=='')
         {
             $message= 'Veuillez entrer quelque chose!';

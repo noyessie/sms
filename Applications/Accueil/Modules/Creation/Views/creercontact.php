@@ -16,7 +16,7 @@
         <div class=".col-xs-12 .col-sm-6 .col-lg-8">
             <input class="form-control" placeholder="Entrer l'email" type="text" name="email" value="">
         </div>
-        <select name="groupeContact" id="groupeContact" class="form-control">
+        <select name="groupeUpload" id="groupeContact" class="form-control">
             <?php
             foreach ($groups as $group):
                 $groupName = $group->getNom();
@@ -27,7 +27,7 @@
         </select>
         <p id="autreGroupe" style="display:none; color:blue">
             Veuillez entrer la nouvelle valeur ici:
-            <input type="text" name="inputAutreGroupe" id="inputAutreGroupe" class="form-control" style="color:black" value="">
+            <input type="text" name="inputAutreGroupeUpload" id="inputAutreGroupe" class="form-control" style="color:black" value="">
         </p>
 
         <div class=".col-xs-12 .col-sm-6 .col-lg-8">
@@ -44,5 +44,15 @@
         </div>
     </div>
 </form>
+     <h3>Ou bien, uploader un fichier d'étudiants:</h3>
+        Selectionner un fichier à upload: <br />
         
+        <form action="/sms/creation/upload" method="post" id="form_uploadEtudiant"
+              enctype="multipart/form-data">
+            <input type="file" name="fichier" size="50" />
+            <input type="submit" value="Enregistrer"/>
+            
+        </form>
+        
+    
 <div>

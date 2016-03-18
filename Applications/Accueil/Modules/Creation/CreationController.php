@@ -1,141 +1,247 @@
 <?php
+
 namespace Applications\Accueil\Modules\Creation;
+
 use Library\BackController;
 use Library\HTTPRequest;
 use Library\Controls;
 use Library\Entities\Groupe;
 use Library\Entities\ContactHasGroupe;
 use Library\Entities\Contact;
+use Library\Fichier;
+use Library\Upload;
+
 /**
  * classe permettant de creer les differents elements:
  * 1. un contact
  * 2. un groupe
  */
-class CreationController extends BackController{
+class CreationController extends BackController {
 
     /**
      * methode permettant de creer un groupe
      */
     public function executeIndex(HTTPRequest $http) {
-        
+
         $manager = $this->managers->getManagerOf('Groupe');
-        $groups=$manager->find();
-        $this->page()->addVar('groups' , $groups);
+        $groups = $manager->find();
+        $this->page()->addVar('groups', $groups);
         $this->page()->getGeneratedPage();
     }
+
     /**
      * methode permettant d'enregistrer un groupe
      */
-    public function executeCreergroupe(HTTPRequest $http)
-    {
-        $control=new \Library\Controls();
-        $erreur=$control->validationChamp($http->postData('groupe'));
-            
-        if($control->estVide($erreur))
-        {
-            //on peut proceder a la suite
-                echo 'on entre!';
-            //on hydrate un bean qui va se charger de recuperer les infos et de faire la verification
-                
-                $manager = $this->managers->getManagerOf('Groupe');
-		$group = new Groupe();
+    public function executeCreergroupe(HTTPRequest $http) {
+        $control = new \Library\Controls();
+        $erreur = $control->validationChamp($http->postData('groupe'));
 
-		$group['nom'] = $http->postData('groupe');
-		$group['idUser']=1;
-                var_dump($group);
-                var_dump($manager);
-                $manager->create($group);   
+        if ($control->estVide($erreur)) {
+            //on peut proceder a la suite
+            echo 'on entre!';
+            //on hydrate un bean qui va se charger de recuperer les infos et de faire la verification
+
+            $manager = $this->managers->getManagerOf('Groupe');
+            $group = new Groupe();
+
+            $group['nom'] = $http->postData('groupe');
+            $group['idUser'] = 1;
+            var_dump($group);
+            var_dump($manager);
+            $manager->create($group);
             // on se redirige
             echo 'cest fait';
-               
-	}
+        }
         $this->page()->addVar('error_message', $erreur);
         $this->page()->getGeneratedPage();
-        
     }
+
     /**
      * methode permettant d'enregistrer un contact
      */
-    public function executeCreercontact(HTTPRequest $http)
-    {
-        $control=new \Library\Controls();
-        $erreur=array();
-        $erreur[]=$control->validationChamp($http->postData('nom'));
+    public function executeCreercontact(HTTPRequest $http) {
+        $control = new \Library\Controls();
+        $erreur = array();
+        $erreur[] = $control->validationChamp($http->postData('nom'));
         //$erreur[]=$control->validationNumTel('00237',$http->postData('number1'));
-        if($http->postExists('number2'))
-        {
-          //  $erreur[]=$control->validationNumTel('00237',$http->postData('number2'));            
+        if ($http->postExists('number2')) {
+            //  $erreur[]=$control->validationNumTel('00237',$http->postData('number2'));            
         }
-        if($http->postExists('number3'))
-        {
+        if ($http->postExists('number3')) {
             //$erreur[]=$control->validationNumTel('00237',$http->postData('number3'));        
         }
-        $flag=false;
-        if(!$http->postExists('groupeContact'))
-        {
-            $erreur[]=$control->validationChamp($http->postData('inputAutreGroupe'));
-            $flag=true;
+        $flag = false;
+        if (!$http->postExists('groupeContact')) {
+            $erreur[] = $control->validationChamp($http->postData('inputAutreGroupe'));
+            $flag = true;
         }
-        if($control->estVideTab($erreur))
-        {
+        if ($control->estVideTab($erreur)) {
             //on peut proceder a la suite
-                echo 'on entre!';
+            echo 'on entre!';
             //on hydrate un bean qui va se charger de recuperer les infos et de faire la verification
-                
-                $manager = $this->managers->getManagerOf('Contact');
-		$contact = new Contact();
-
-		$contact['nom'] = $http->postData('nom');
-		$contact['prenom'] = $http->postData('prenom');
-                $contact['email'] = $http->postData('email');
-                $contact['idUser'] = 1;
-                $numero=array();
-                if($http->postExists('number1'))
-                {
-                    $numero[]=$http->postData('number1');
-                }
-                if($http->postExists('number2'))
-                {
-                    $numero[]=$http->postData('number2');
-                }
-                if($http->postExists('number3'))
-                {
-                    $numero[]=$http->postData('number3');
-                }
-                $contact['numero'] = $numero;
-                $manager->create($contact);
-                //on passe au mapping sur le groupe
-                $manager = $this->managers->getManagerOf('ContactHasGroupe');
-		$contacthasgroupe = new ContactHasGroupe();
-                $contacthasgroupe['contact']=$contact;
-                $group=new Groupe();
-                if($flag)
-                {
-                    $group['nom']=$http->postData('inputAutreGroupe');
-                }else
-                {
-                    $group['nom']=$http->postData('groupeContact');
-                }
-                $group['idUser']=1;
-                $contacthasgroupe['groupe']=$group;
-                $manager->create($contacthasgroupe);
-                
-
+            //
+            if ($flag) {
+                $group['nom'] = $http->postData('inputAutreGroupe');
+            } else {
+                $group['nom'] = $http->postData('groupeContact');
+            }
+            $contactTo=array();
+            $contactTo['nom']=$http->postData('nom');
+            $contactTo['prenom']=$http->postData('prenom');
+            $contactTo['email']=$http->postData('email');
+            $contactTo['numero1']=$http->postData('number1');
+            $contactTo['numero2']=$http->postData('number2');
+            $contactTo['numero3']=$http->postData('number3');
+            $contactTo['groupe']=$group['nom'];
+            $this->saveContact($contactTo);
             // on se redirige
             echo 'cest fait';
-               
-	}
-        $resultErreur='';
-        foreach($erreur as $r)
-        {
-            $resultErreur=$resultErreur.PHP_EOL.$r;
+        }
+        $resultErreur = '';
+        foreach ($erreur as $r) {
+            $resultErreur = $resultErreur . PHP_EOL . $r;
         }
         $manager = $this->managers->getManagerOf('Groupe');
-        $groups=$manager->find();
-        $this->page()->addVar('groups' , $groups);
-        
+        $groups = $manager->find();
+        $this->page()->addVar('groups', $groups);
+
         $this->page()->addVar('error_message', $resultErreur);
         $this->page()->getGeneratedPage();
-        
     }
+
+    /**
+     * methode permettant l'uploade de contacts
+     */
+    public function executeUploadercontacts(HTTPRequest $http) {
+        $fichier = new Fichier();
+        //on uploade le fichier
+        $nombre=count($fichier->listeFichierRepertoire('C:/wamp/www/sms/Applications/Accueil/Modules/Creation/Files/'));
+        $nombre++;
+        $upload = new Upload();
+        $resultUpload = $upload->uploaderGeneral('C:/wamp/www/sms/Applications/Accueil/Modules/Creation/Files/', 'contacts'.$nombre.'.csv');
+        $erreur = '';
+        //puis on enregistre les elements dans la bd
+        if ($resultUpload) {
+            echo 'on arrice ic';
+            $forme = array();
+            $forme[] = 'nom';
+            $forme[] = 'prenom';
+            $forme[] = 'email';
+            $forme[] = 'numero1';
+            $forme[] = 'numero2';
+            $forme[] = 'numero3';
+            $result = $fichier->traiteFichier('C:/wamp/www/sms/Applications/Accueil/Modules/Creation/Files/contacts'.$nombre.'.csv', $forme);
+            //on passe a la validation tous les champs de tous les contacts
+            var_dump($result);
+            $flag = false;
+            $tabContacts = array();
+            foreach ($result as $elem) {
+                var_dump($elem);
+                if (!$this->validationContact($elem)) {
+                    $flag = true;
+                    break;
+                }
+                $contactTo=array();
+                $contactTo['nom']=$elem['nom'];
+                $contactTo['prenom']=$elem['prenom'];
+                $contactTo['email']=$elem['email'];
+                $contactTo['numero1']=$elem['numero1'];
+                if(isset($elem['numero2']))
+                {
+                    $contactTo['numero2']=$elem['numero2'];
+                }
+                if(isset($elem['numero3']))
+                {
+                    $contactTo['numero3']=$elem['numero3'];
+                }
+                if(isset($http->postData('groupeUpload')))
+                {
+                    $contactTo['groupe']=$http->postData('groupeUpload');
+                }else
+                {
+                    $contactTo['groupe']=$http->postData('inputAutreGroupeUpload');
+                }
+                
+                $this->saveContact($contactTo);
+            
+            }
+            if ($flag) {
+                //y'a un contact invalide
+                $erreur = 'Il y\'a des contacts invalides dans le fichier';
+            } else {
+                //puis on passe au mapping dans la base de données
+                //
+                //success
+                echo 'success !';
+            }
+        } else {
+            $erreur = 'Erreur lors de l\'upload du fichier';
+        }
+        $this->page()->addVar('error_message', $erreur);
+        $this->page()->getGeneratedPage();
+    }
+
+    /**
+     * methode de validation d'un contact
+     */
+    private function validationContact($contact) {
+        $controls = new Controls();
+        $erreurs = array();
+        if (isset($contact['nom'])) {
+            $erreurs[] = $controls->validationChamp($contact['nom']);
+            var_dump($erreurs);
+        } else if (isset($contact['prenom'])) {
+            //$erreurs[]=$controls->validationChamp($contact['prenom'])
+            var_dump($erreurs);
+        } else if (isset($contact['email'])) {
+            //$erreurs[]=$controls->validationEmail($contact['email']);
+            var_dump($erreurs);
+        } else if (isset($contact['numero1'])) {
+            //$erreurs[]=$controls->validationNombre($contact['numero1']);
+            var_dump($erreurs);
+        } else if (isset($contact['numero2'])) {
+            //$erreurs[]=$controls->validationNombre($contact['numero2']);
+            var_dump($erreurs);
+        } else if (isset($contact['numero3'])) {
+            //$erreurs[]=$controls->validationNombre($contact['numero3']);
+            var_dump($erreurs);
+        }
+        var_dump($erreurs);
+        return $controls->estVideTab($erreurs);
+    }
+
+    /**
+     * methode d'enregistrement d'un contact
+     */
+    private function saveContact($contactTo) {
+        $manager = $this->managers->getManagerOf('Contact');
+        $contact = new Contact();
+
+        $contact['nom'] = $contactTo['nom'];
+        $contact['prenom'] = $contactTo['prenom'];
+        $contact['email'] = $contactTo['email'];
+        $contact['idUser'] = 1;
+        $numero = array();
+        if (isset($contactTo['numero1'])) {
+            $numero[] = $contactTo['numero1'];;
+        }
+        if (isset($contactTo['numero2'])) {
+            $numero[] = $contactTo['numero2'];;
+        }
+        if (isset($contactTo['numero3'])) {
+            $numero[] = $contactTo['numero3'];;
+        }
+        $contact['numero'] = $numero;
+        $manager->create($contact);
+        //on passe au mapping sur le groupe
+        $manager = $this->managers->getManagerOf('ContactHasGroupe');
+        $contacthasgroupe = new ContactHasGroupe();
+        $contacthasgroupe['contact'] = $contact;
+        $group = new Groupe();
+        $group['nom']=$contactTo['groupe'];
+        $group['idUser'] = 1;
+        $contacthasgroupe['groupe'] = $group;
+        $manager->create($contacthasgroupe);
+    }
+
 }
