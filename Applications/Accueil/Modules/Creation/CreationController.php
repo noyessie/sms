@@ -116,7 +116,7 @@ class CreationController extends BackController {
     public function executeUploadercontacts(HTTPRequest $http) {
         $fichier = new Fichier();
         //on uploade le fichier
-        $config=new Config();
+        $config=new Config($this->app());
         $nombre=count($fichier->listeFichierRepertoire($config->get('cheminDossierReception')));
         $nombre++;
         $upload = new Upload();

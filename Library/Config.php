@@ -10,6 +10,9 @@ class Config extends ApplicationComponent
 {
   protected $vars = array();
  
+  public function __construct(Application $app) {
+      parent::__construct($app);
+  }
   public function get($var)
   {
     if (!$this->vars)
