@@ -29,4 +29,20 @@ class UserController extends BackController{
 			$this->app()->httpResponse()->redirect('test/user/');
 		}
 	}
+
+	public function executeDelete(HTTPRequest $http){
+		$id = $http->getData('id');
+		$manager = $this->managers->getManagerOf('User');
+		$user = new User();
+		$user['id'] = $id;
+
+		$manager->delete($user);
+
+		$this->app()->httpResponse()->redirect('test/user');
+
+	}
+
+	public function executeSearch(HTTPRequest $http){
+		
+	}
 }

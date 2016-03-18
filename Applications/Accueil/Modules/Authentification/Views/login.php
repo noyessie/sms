@@ -4,7 +4,7 @@
 	<?php endif;?>
 	<br>
 	<br>
-	<form method="post" action="login">
+	<form method="post" action="/stage/login">
 		<div class="form-group">
 			<div class=".col-xs-12 .col-sm-6 .col-lg-8">
 				<input class="form-control" placeholder="login" type="text" name="login" value="">

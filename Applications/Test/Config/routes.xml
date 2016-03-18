@@ -1,5 +1,7 @@
 <routes>
 
-	<route url="/test/user/create/?" module="User" action="create"/>
-	<route url="/test/user/?" module="User" action="index"/>
+	<route url="/test/user/create/" module="User" action="create"/>
+	<route url="/test/user/([0-9]+)/delete/" module="User" action="delete" vars="id"/>
+	<route url="/test/user/" module="User" action="index"/>
+	<route url="/test/user/search/" module="User" action="index"/>
 </routes>
