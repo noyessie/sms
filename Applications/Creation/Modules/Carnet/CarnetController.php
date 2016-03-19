@@ -1,6 +1,6 @@
 <?php
 
-namespace Applications\Accueil\Modules\Creation;
+namespace Applications\Creation\Modules\Carnet;
 
 use Library\BackController;
 use Library\HTTPRequest;
@@ -17,7 +17,7 @@ use Library\Upload;
  * 1. un contact
  * 2. un groupe
  */
-class CreationController extends BackController {
+class CarnetController extends BackController {
 
     /**
      * methode permettant de creer un groupe

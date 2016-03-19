@@ -4,14 +4,4 @@
         <route url="^/home/?$" module="Home" action="index"/>
         <route url="^/verification/?$" module="Authentification" action="verification"/>
         <route url="^/logout/?$" module="Authentification" action="logout"/>
-        <route url="/sms/acceuil/creation/groupe/?" module="Creation" action="creergroupe"/>
-        <route url="/sms/acceuil/creation/contact/?" module="Creation" action="creercontact"/>
-        <route url="/acceuil/creation/index/?" module="Creation" action="index"/>
-        <route url="/acceuil/creation/groupe/?" module="Creation" action="creergroupe"/>
-        <route url="/acceuil/creation/contact/?" module="Creation" action="creercontact"/>
-        <route url="/creation/index/?" module="Creation" action="index"/>
-        <route url="/creation/groupe/?" module="Creation" action="creergroupe"/>
-        <route url="/creation/contact/?" module="Creation" action="creercontact"/>
-        <route url="/sms/creation/upload/contacts/?" module="Creation" action="uploadercontacts"/>
-        <route url="/creation/upload/contacts/?" module="Creation" action="uploadercontacts"/>
 </routes>

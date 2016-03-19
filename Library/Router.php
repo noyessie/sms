@@ -22,6 +22,7 @@ class Router
 
 	public function getRoute($url){
             var_dump($url);
+            var_dump($this->routes);
             foreach ($this->routes as $route) {
                 // Si la route correspond à l'URI
                 if(($varsValues = $route->match($url)) !== false)
@@ -31,7 +32,7 @@ class Router
                     {
                         //echo "has var !";
                         $varsNames = $route->varsNames();
-                        //print_r($varsNames);
+                        print_r($varsNames);
                         $listVars = array();
 
                         //on crée un nouveau tableau clé/Valeur.
@@ -43,7 +44,7 @@ class Router
                         }
 
                         //on assigne ce tableau de variable à la route
-                        //print_r($listVars);
+                        print_r($listVars);
                         $route->setVars($listVars);
                     }
                     return $route;
