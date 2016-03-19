@@ -46,7 +46,7 @@ class AuthentificationController extends BackController{
                     {
                             //c'est ok!
                             //on continue dans la plateforme
-                            echo 'bonnnnnnn';
+                            $this->app()->httpResponse()->redirect('home/');
                         break;
                     }
                 }

@@ -51,7 +51,7 @@ class CarnetController extends BackController {
             var_dump($manager);
             $manager->create($group);
             // on se redirige
-            echo 'cest fait';
+            $this->app()->httpResponse()->redirect('home/');
         }
         $this->page()->addVar('error_message', $erreur);
         $this->page()->getGeneratedPage();
@@ -97,6 +97,7 @@ class CarnetController extends BackController {
             $this->saveContact($contactTo);
             // on se redirige
             echo 'cest fait';
+            $this->app()->httpResponse()->redirect('home/');
         }
         $resultErreur = '';
         foreach ($erreur as $r) {
@@ -176,6 +177,7 @@ class CarnetController extends BackController {
                 //
                 //success
                 echo 'success !';
+                $this->app()->httpResponse()->redirect('home/');
             }
         } else {
             $erreur = 'Erreur lors de l\'upload du fichier';

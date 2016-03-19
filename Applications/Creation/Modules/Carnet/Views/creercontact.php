@@ -5,7 +5,7 @@
 	<br>
 	<br>
 
-  <form method="post" id="contact" action="/sms/creation/contact">
+  <form method="post" id="contact" action="/sms/creation/carnet/contact" onclick="verifAutreContact()">
 		<div class="form-group">
 			<div class=".col-xs-12 .col-sm-6 .col-lg-8">
 				<input class="form-control" placeholder="Entrer le nom" type="text" name="nom" value="">
@@ -47,7 +47,7 @@
         
     <h3>Ou bien, uploader un fichier de contacts:</h3>
         D'abord, selectionner un groupe:
-    <form action="/sms/creation/upload/contacts" method="post" id="form_uploadContact"
+    <form action="/sms/creation/carnet/upload/contacts" method="post" id="form_uploadContact" onclick="verifAutreContact()"
               enctype="multipart/form-data">
         
         <select name="groupeContact" id="groupeContact" class="form-control">

@@ -1,6 +1,8 @@
 RewriteEngine on
 RewriteBase /sms/
 
+RewriteRule ^creation/(.*)$ index.php?app=Creation [QSA,L]
+
 RewriteRule ^test/(.*)$ index.php?app=Test [QSA,L]
 
 RewriteRule ^settings/(.*)$ index.php?app=Settings [QSA,L]

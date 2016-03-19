@@ -6,8 +6,8 @@
 	<define var="username" value="root"/>
 	<define var="nom_de_la_base" value="mydb"/>
 	<define var="mot_de_passe" value=""/>
-	<define var="usernameAPI" value=""/>
-	<define var="passwordAPI" value=""/>
+	<define var="usernameAPI" value="patricksanang"/>
+	<define var="passwordAPI" value="cYiTdXqX"/>
 	<define var="senderAPI" value=""/>
 	<define var="ftp_server" value="localhost"/>
 	<define var="ftp_login" value="a6698046"/>

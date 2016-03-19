@@ -4,7 +4,7 @@
 	<?php endif;?>
 	<br>
 	<br>
-	<form method="post" action="/sms/creation/groupe">
+	<form method="post" action="/sms/creation/carnet/groupe">
 		<div class="form-group">
 			<div class=".col-xs-12 .col-sm-6 .col-lg-8">
 				<input class="form-control" placeholder="Entrer un nom de groupe" type="text" name="groupe" value="">

@@ -4,7 +4,7 @@
 	<?php endif;?>
 	<br>
 	<br>
-	<form method="post" id="groupe" action="/sms/creation/groupe">
+	<form method="post" id="groupe" action="/sms/creation/carnet/groupe">
 		<div class="form-group">
 			<div class=".col-xs-12 .col-sm-6 .col-lg-8">
 				<input class="form-control" placeholder="Entrer un nom de groupe" type="text" name="groupe" value="">
@@ -18,7 +18,7 @@
         <br>
         <br>
         Ou alors, creer un contact
-        <form method="post" id="contact" action="/sms/creation/contact">
+        <form method="post" name="form_contact" id="form_contact" action="/sms/creation/carnet/contact" onclick="verifAutreContact()">
 		<div class="form-group">
 			<div class=".col-xs-12 .col-sm-6 .col-lg-8">
 				<input class="form-control" placeholder="Entrer le nom" type="text" name="nom" value="">
@@ -60,7 +60,7 @@
         
     <h3>Ou bien, uploader un fichier de contacts:</h3>
         D'abord, selectionner un groupe:
-    <form action="/sms/creation/upload/contacts" method="post" id="form_uploadContact"
+    <form action="/sms/creation/carnet/upload/contacts" method="post" id="form_uploadContact"
               enctype="multipart/form-data">
         
         <select name="groupeUploadContact" id="groupeUploadContact" class="form-control">

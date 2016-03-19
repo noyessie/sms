@@ -4,7 +4,7 @@
     <?php endif; ?>
   <h3>Ou bien, uploader un fichier de contacts:</h3>
         D'abord, selectionner un groupe:
-    <form action="/sms/creation/upload/contacts" method="post" id="form_uploadContact"
+    <form action="/sms/creation/carnet/upload/contacts" method="post" id="form_uploadContact"
               enctype="multipart/form-data">
         
         <select name="groupeUploadContact" id="groupeUploadContact" class="form-control">

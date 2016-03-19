@@ -1,4 +1,5 @@
 <?php
+namespace Library;
 
 class Api{
 function envoi($username, $password, $sender, $body, $recipients) {
@@ -115,4 +116,4 @@ function getDeliveryReport($id, $username, $password)
 $api=new Api();
 $recipients=array('00237698158390');
 //echo $api->envoi('patricksanang', 'cYiTdXqX', 'entreprise', 'tatete', $recipients);
-$api->getDeliveryReport(1, 'patricksanang', 'cYiTdXqX');
+//$api->getDeliveryReport(1, 'patricksanang', 'cYiTdXqX');
