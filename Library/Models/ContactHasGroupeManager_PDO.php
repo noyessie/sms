@@ -1,28 +1,29 @@
 <?php
 namespace Library\Models;
-use Library\Entities\ContactHasGroupe;
 
 class ContactHasGroupeManager_PDO extends ManagerCrud{
 	public function __construct($dao){
 		parent::__construct($dao);
 		$this->mapping = array(
 				'id'=>'id_contact_has_groupe',
-				'groupe'=>'groupe_idcontact',
-				'contact'=>'contact_idcontact',
+				'idgroupe'=>'groupe_idgroupe',
+				'idcontact'=>'contact_idcontact',
 			);
 		$this->table_name = "contact_has_groupe";
 	}
 
-	
-
-	public function bindValue($query , Entity $entity){
-		foreach($this->mapping as $key=>$val){
+	/*public function bindValue($query , Entity $entity){
+	   var_dump($query);
+					
+           /* foreach($this->$mapping as $key=>$val){
 			if($key != 'id'){
-				$query->bindValue($key , $entity[$key]);
+                         	$query->bindValue($key , $entity[$key]['id']);
+			}else{
+            			$query->bindValue($key , $entity[$key]);
 			}
 		}
 		return $query;
-	}
+        }*/
 
 	public function fetch($query){
 		$results = $query->fetchAll();

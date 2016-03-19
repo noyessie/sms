@@ -156,9 +156,10 @@ class CreationController extends BackController {
                 {
                     $contactTo['numero3']=$elem['numero3'];
                 }
-                if($http->postExists('groupeUpload'))
+                var_dump($http->postData('groupeUploadContact'));
+                if($http->postExists('groupeUploadContact'))
                 {
-                    $contactTo['groupe']=$http->postData('groupeUpload');
+                    $contactTo['groupe']=$http->postData('groupeUploadContact');
                 }else
                 {
                     $contactTo['groupe']=$http->postData('inputAutreUploadGroupe');
@@ -179,6 +180,9 @@ class CreationController extends BackController {
         } else {
             $erreur = 'Erreur lors de l\'upload du fichier';
         }
+        $manager = $this->managers->getManagerOf('Groupe');
+        $groups = $manager->find();
+        $this->page()->addVar('groups', $groups);
         $this->page()->addVar('error_message', $erreur);
         $this->page()->getGeneratedPage();
     }
@@ -236,14 +240,20 @@ class CreationController extends BackController {
         $contact['numero'] = $numero;
         $manager->create($contact);
         //on passe au mapping sur le groupe
-        $manager = $this->managers->getManagerOf('ContactHasGroupe');
+        //recherche de l'id du contact
+        $r=$manager->find(array('nom'=>$contactTo['nom'], 'prenom'=>$contactTo['prenom'], 'email'=>$contactTo['email']));
+        $idcontact=$r[0]->getId();
+        //var_dump($idcontact);
+        //recherche de l'id du groupe
+        $manager=$this->managers->getManagerOf('Groupe');
+        $r=$manager->find(array('nomGroupe'=>$contactTo['groupe']));
+        $idgroupe=$r[0]->getId();
+        
+        $manager1 = $this->managers->getManagerOf('ContactHasGroupe');
         $contacthasgroupe = new ContactHasGroupe();
-        $contacthasgroupe['contact'] = $contact;
-        $group = new Groupe();
-        $group['nom']=$contactTo['groupe'];
-        //$group['idUser'] = 1;
-        $contacthasgroupe['groupe'] = $group;
-        $manager->create($contacthasgroupe);
+        $contacthasgroupe['idcontact'] = $idcontact;
+        $contacthasgroupe['idgroupe'] = $idgroupe;
+        $manager1->create($contacthasgroupe);
     }
 
 }

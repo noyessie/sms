@@ -7,7 +7,7 @@
     <form action="/sms/creation/upload/contacts" method="post" id="form_uploadContact"
               enctype="multipart/form-data">
         
-        <select name="groupeContact" id="groupeContact" class="form-control">
+        <select name="groupeUploadContact" id="groupeUploadContact" class="form-control">
             <?php
             foreach ($groups as $group):
                 $groupName = $group->getNom();
@@ -18,7 +18,7 @@
         </select>
         <p id="autreUploadGroupe" style="display:none; color:blue">
             Veuillez entrer la nouvelle valeur ici:
-            <input type="text" name="inputAutreUploadGroupe" id="inputAutreUploadGroupe" class="form-control" style="color:black" value="">
+            <input type="text" name="inputAutreUploadGroupeContact" id="inputAutreUploadGroupeContact" class="form-control" style="color:black" value="">
         </p>
 
         

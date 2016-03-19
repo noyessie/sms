@@ -82,11 +82,18 @@ class ManagerCrud extends Manager
 		$sql = "INSERT INTO " . $this->table_name ." SET ";
 		$sql .= $this->map();
 		$query = $this->dao->prepare($sql);
-		$query = $this->bindValue($query , $entity);
+		var_dump($query);
+                var_dump($entity);
+                $query = $this->bindValue($query , $entity);
 
 		Utilities::print_table($query);
+		$id=0;
+                try {
+                    $id =  $query->execute() ? $this->dao->lastInsertId() : 0;
 		
-		$id =  $query->execute() ? $this->dao->lastInsertId() : 0;
+                } catch (\PDOException $ex) {
+                    
+                }
 		return $id;
 	}
 
