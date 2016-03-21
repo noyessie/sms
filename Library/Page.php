@@ -50,8 +50,48 @@ class Page extends ApplicationComponent
 		//echo "<br> C'est une requette ajax ".$content."<br>";
 
 		ob_start();
-			require __DIR__.'/../Applications/'.
-			$this->app->name().'/Templates/layout.php';
+                //on change un tout petit peu la philosopie de chargement des vues
+                $_SESSION['user']='patrick';
+                $user=$_SESSION['user'];
+                //chargement du header
+                $flag=file_exists(__DIR__.'/../Applications/'.
+			$this->app->name().'/Templates/header.php');
+                ob_start();
+                if($flag)
+                {
+                    require(__DIR__.'/../Applications/'.
+			$this->app->name().'/Templates/header.php');
+                }else{
+                    require __DIR__.'/../Library/'.
+			'Views/header.php';
+                }
+		$header=ob_get_clean();
+                
+                //chargement du menu
+                $flag=file_exists(__DIR__.'/../Applications/'.
+			$this->app->name().'/Templates/nav.php');
+                ob_start();
+                if($flag)
+                {
+                    require(__DIR__.'/../Applications/'.
+			$this->app->name().'/Templates/nav.php');
+                }else{
+                    require __DIR__.'/../Library/'.
+			'Views/nav.php';
+                }
+		$nav=ob_get_clean();
+                //chargement du template de base
+                $flag=file_exists(__DIR__.'/../Applications/'.
+			$this->app->name().'/Templates/layout.php');
+                
+                if($flag)
+                {
+                    require(__DIR__.'/../Applications/'.
+			$this->app->name().'/Templates/layout.php');
+                }else{
+                    require __DIR__.'/../Library/'.
+			'Views/layout.php';
+                }
 		return ob_get_clean();
 	}
 

@@ -1,5 +1,5 @@
 <?php
-namespace Applications\Accueil\Modules\Home;
+namespace Applications\Home\Modules\Home;
 use Library\BackController;
 use Library\HTTPRequest;
 use Library\Entities\User;

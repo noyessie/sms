@@ -1,12 +1,12 @@
 <?php
-namespace Applications\Accueil;
+namespace Applications\Authentification;
 
 use Library\Application;
 
-class AccueilApplication extends Application{
+class AuthentificationApplication extends Application{
 	public function __construct(){
 		parent::__construct();
-		$this->name = "Accueil";
+		$this->name = "Authentification";
 	}
 
 	public function run(){

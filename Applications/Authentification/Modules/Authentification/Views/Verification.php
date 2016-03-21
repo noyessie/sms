@@ -22,6 +22,4 @@
 			<input class="btn btn-primary btn-lg" type="submit" value="connection">
 		</div>
 	</form>
-
-
 </div>

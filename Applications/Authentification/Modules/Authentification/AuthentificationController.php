@@ -1,5 +1,5 @@
 <?php
-namespace Applications\Accueil\Modules\Authentification;
+namespace Applications\Authentification\Modules\Authentification;
 use Library\BackController;
 use Library\HTTPRequest;
 use Library\Entities\User;

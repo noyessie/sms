@@ -1,0 +1,4 @@
+<routes>
+	<route url="/home/?$" module="Home" action="index"/>
+        <route url="/sms/home/?$" module="Home" action="index"/>
+</routes>

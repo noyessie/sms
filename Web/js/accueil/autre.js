@@ -1,8 +1,6 @@
 function verifAutreContact(){
 	var selectBoxGroupeContact = document.form_contact.groupeContact;
-    var selectBoxUploadGroupeContact = document.form_uploadContact.groupeContact;
 	var autreGroupeContact = false;
-	var autreUploadGroupeContact = false;
 	//contact
 	for (var i=0; i<selectBoxGroupeContact.options.length; i++) {
 		if (selectBoxGroupeContact.options[i].selected) {
@@ -16,6 +14,11 @@ function verifAutreContact(){
 	} else {
 		document.getElementById('autreGroupe').style.display="none";
 	}
+}
+function verifAutreUploadContact()
+{
+        var selectBoxUploadGroupeContact = document.form_uploadContact.groupeUploadContact;
+	var autreUploadGroupeContact = false;
         //uploadcontact
 	for (var i=0; i<selectBoxUploadGroupeContact.options.length; i++) {
 		if (selectBoxUploadGroupeContact.options[i].selected) {
@@ -29,5 +32,6 @@ function verifAutreContact(){
 	} else {
 		document.getElementById('autreUploadGroupe').style.display="none";
 	}
+    
 }
 	

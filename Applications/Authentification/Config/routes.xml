@@ -1,7 +1,6 @@
 <routes>
 	<route url="/?" module="Authentification" action="login"/>
 	<route url="^/login/?$" module="Authentification" action="login"/>
-        <route url="^/home/?$" module="Home" action="index"/>
         <route url="^/verification/?$" module="Authentification" action="verification"/>
         <route url="^/logout/?$" module="Authentification" action="logout"/>
 </routes>
