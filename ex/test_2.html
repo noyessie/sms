@@ -1,0 +1,34 @@
+<style type="text/css">
+img
+{
+position: absolute; // Les images vont se superposer
+overflow: hidden;
+left: 0px; // A gauche
+top: 0px; // et en haut de la feuille
+display: none; // Par défaut, elles ne seront pas affichées
+ -webkit-transition: .6s ease-in-out left;
+          transition: .6s ease-in-out left;
+}
+</style>
+<img src="images/1.jpg" id="img5">
+<img src="images/2.jpg" id="img4">
+<img src="images/3.jpg" id="img3">
+<img src="images/4.jpg" id="img2">
+<img src="images/5.jpg" id="img1">
+<script src="jquery.js"></script>
+<script>
+$(function() {
+var i=0;
+affiche();
+function affiche() {
+i++;
+if (i==1) precedent = '#img5'
+else precedent = '#img' + (i-1);
+var actuel = '#img' + i;
+$(precedent).fadeOut(2000);
+$(actuel).fadeIn(2000);
+if (i==5) i=0;     
+}
+setInterval(affiche, 2000);
+});
+</script>
