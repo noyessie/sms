@@ -1,4 +1,5 @@
 <routes>
-    <route url="/settings/params/change/?" module="Params" action="change"/>
-    <route url="/settings/params/index/?" module="Params" action="index"/>
+    <route url="/settings/?" module="Settings" action="index"/>
+    <route url="/settings/verification/?" module="Settings" action="verification"/>
+    <route url="/sms/settings/verification/?" module="Settings" action="verification"/>
 </routes>

@@ -27,7 +27,7 @@ abstract class Application
 	public function getController(){
 		$router = new \Library\Router;
 		$xml = new \DOMDocument;
-                echo 'nom du controleur '.  $this->name;
+                //echo 'nom du controleur '.  $this->name;
 		$xml->load(__DIR__.'/../Applications/'.$this->name.'/Config/routes.xml');
 		$routes = $xml->getElementsByTagName('route');
 
@@ -48,7 +48,8 @@ abstract class Application
                         //On ajoute la route au routeur
 			$router->addRout(new Route($route->getAttribute('url') , $route->getAttribute('module') , $route->getAttribute('action') , $vars));
 		}
-                var_dump($router->getRoute($this->httpRequest->requestURI()));
+                //
+                //var_dump($router->getRoute($this->httpRequest->requestURI()));
 		try{
 			//on récupère la route correspondante à l'url
 			//echo "l'url que je resoit c'est  <br>"; 

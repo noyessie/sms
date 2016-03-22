@@ -71,8 +71,8 @@ function envoi($username, $password, $sender, $body, $recipients) {
  */
 function getCredit($username, $password)
 {
-    $url="http://193.105.74.59/api/command?username='.$username.'&password='.$password.'&cmd=CREDITS"; 
-    
+    $url="http://193.105.74.59/api/command?username=$username&password=$password&cmd=CREDITS"; 
+    //echo $url;
     return $this->lancerCURL($url);
     //return $response;   
 }
@@ -107,7 +107,7 @@ private function lancerCURL($url)
  */
 function getDeliveryReport($id, $username, $password)
 {
-    $url='http://193.105.74.59/api/dlrpull?user='.$username.'&password='.$password.'&messageid='.$id.'';
+    $url="http://193.105.74.59/api/dlrpull?user=$username&password=$password&messageid=$id";
     $content=$this->lancerCURL($url);
     $contentxml= simplexml_load_string($content);
     return $contentxml->status=='DELIVERED';

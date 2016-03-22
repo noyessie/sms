@@ -30,7 +30,7 @@ class AuthentificationController extends BackController{
         if($control->estVide($erreur))
         {
             //on peut proceder a la suite
-                echo 'on entre!';
+           //     echo 'on entre!';
             //on hydrate un bean qui va se charger de recuperer les infos et de faire la verification
                 
                 $manager = $this->managers->getManagerOf('User');
@@ -46,6 +46,7 @@ class AuthentificationController extends BackController{
                     {
                             //c'est ok!
                             //on continue dans la plateforme
+                            
                             $this->app()->httpResponse()->redirect('home/');
                         break;
                     }
@@ -100,7 +101,7 @@ class AuthentificationController extends BackController{
 	public function executeLogout(HTTPRequest $http){
 		$this->app()->session()->setAuthenticated(false);
 		$this->app()->session()->setAttribute('user' , null);
-		$this->app()->httpResponse()->redirect('login');
+		$this->app()->httpResponse()->redirect('authentification/login');
 		//$this->app()->session()->destroy();
 	}
 }

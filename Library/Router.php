@@ -21,8 +21,8 @@ class Router
 	}
 
 	public function getRoute($url){
-            var_dump($url);
-            var_dump($this->routes);
+            //var_dump($url);
+            //var_dump($this->routes);
             foreach ($this->routes as $route) {
                 // Si la route correspond à l'URI
                 if(($varsValues = $route->match($url)) !== false)

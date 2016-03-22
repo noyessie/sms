@@ -109,7 +109,7 @@ class Fichier {
         $j=0;
         $tab;
         foreach ($table as $key) {
-            var_dump($key[0]);
+            //var_dump($key[0]);
                 $temp=\explode(';', $key[0]);
                 foreach($forme as $f)
                 {

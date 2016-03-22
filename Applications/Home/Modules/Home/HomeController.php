@@ -9,8 +9,8 @@ use Library\Api;
 class HomeController extends BackController{
 	public function executeIndex(HTTPRequest $http){
             $api=new Api();
-            var_dump($api);
             $config=new Config($this->app());
+            //$credit=$api->getCredit('patricksanang', 'cYiTdXqX');
             $credit=$api->getCredit($config->get('usernameAPI'), $config->get('passwordAPI'));
             $this->page()->addVar('credit', $credit);
             $this->page()->getGeneratedPage();

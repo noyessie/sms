@@ -9,8 +9,8 @@ RewriteRule ^home/(.*)$ index.php?app=Home [QSA,L]
 
 RewriteRule ^settings/(.*)$ index.php?app=Settings [QSA,L]
 
-RewriteRule ^(.*)$ index.php?app=Authentification [QSA,L] 
+RewriteRule ^authentification/(.*)$ index.php?app=Authentification [QSA,L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
-
-
+ 
+AddType text/css .css

@@ -28,7 +28,6 @@ html,
 body {
   height: 100%;
   background-color: #333;
-  width: 50%;
 }
 body {
   color: #fff;
@@ -38,12 +37,12 @@ body {
 
 /* Extra markup and styles for table-esque vertical and horizontal centering */
 .site-wrapper {
-  background-image: url('../images/b.jpeg') ;
+  background-image: url('/sms/Web/images/background.jpg') ;
   display: table;
   width: 100%;
   height: 100%; /* For at least Firefox */
   min-height: 100%;
-}
+  }
 .site-wrapper-inner {
   display: table-cell;
   vertical-align: top;
@@ -52,7 +51,7 @@ body {
   margin-right: auto;
   margin-left: auto;
 }
- 
+
 /* Padding for spacing */
 .inner {
   padding: 30px;

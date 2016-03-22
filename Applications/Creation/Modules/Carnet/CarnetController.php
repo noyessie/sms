@@ -47,10 +47,11 @@ class CarnetController extends BackController {
 
             $group['nom'] = $http->postData('groupe');
            // $group['idUser'] = 1;
-            var_dump($group);
-            var_dump($manager);
+            /*var_dump($group);
+            var_dump($manager);*/
             $manager->create($group);
             // on se redirige
+            $_SESSION['success_message']="Groupe crée avec succès!";
             $this->app()->httpResponse()->redirect('home/');
         }
         $this->page()->addVar('error_message', $erreur);
@@ -78,7 +79,7 @@ class CarnetController extends BackController {
         }
         if ($control->estVideTab($erreur)) {
             //on peut proceder a la suite
-            echo 'on entre!';
+            //echo 'on entre!';
             //on hydrate un bean qui va se charger de recuperer les infos et de faire la verification
             //
             if ($flag) {
@@ -96,7 +97,7 @@ class CarnetController extends BackController {
             $contactTo['groupe']=$group['nom'];
             $this->saveContact($contactTo);
             // on se redirige
-            echo 'cest fait';
+            $_SESSION['success_message']="Contact crée avec succès!";
             $this->app()->httpResponse()->redirect('home/');
         }
         $resultErreur = '';
