@@ -1,8 +1,13 @@
 <?php
 namespace Library\Models;
 use Library\Entities\SMSHasContact;
-
-class SMShasContactManager_PDO extends ManagerCrud{
+use Library\Entities\SMS;
+use Library\Entity;
+use Library\Models\SMSManager_PDO;
+use Library\Models\ContactManager_PDO;
+use Library\Managers;
+use Library\PDOFactory;
+class SMSHasContactManager_PDO extends ManagerCrud{
 
 	public function __construct($dao){
 		parent::__construct($dao);
@@ -32,13 +37,16 @@ class SMShasContactManager_PDO extends ManagerCrud{
 		$data= array();
 		//sms manager
 		$sms_manager = new SMSManager_PDO($this->dao);
-		$contact_manager = new ContactManager_PDO($this->dao);
-		foreach($results as $r){
-			$element = new $this->entity_class();
-			$element['id'] = $r['id'];
+                $contact_manager = new ContactManager_PDO($this->dao);
+		//var_dump($results);
+                foreach($results as $r){
+		//echo $this->entity_class();
+                    $p=$this->entity_class();
+                    $element=new $p();
+                        $element['id'] = $r['id'];
 			$element['status']=$r['status'];
-			$element['sms'] = $sms_manager->find(array('id'=>$r['sms']));
-			$element['contact'] = $contact_manager->find(array('id'=>$r['contact']));
+			$element['sms'] = $sms_manager->find(array('id'=>$r['sms']))[0];
+			$element['contact'] = $contact_manager->find(array('id'=>$r['contact']))[0];
 			$data[] = $element;
 		}
 		return $data;

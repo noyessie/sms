@@ -22,7 +22,7 @@
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
               <?= $_SESSION['success_message']; ?></div>
     <?php endif; 
-        $_SESSION['success_message']='';
+        unset($_SESSION['success_message']);
     ?>
         
         <?=$content;?>        

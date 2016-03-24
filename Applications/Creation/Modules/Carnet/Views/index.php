@@ -9,7 +9,7 @@
             <form role="form" method="post" id="groupe" action="/sms/creation/carnet/groupe">
                 <div class="form-group">
                     <label for="groupe">
-                        Creer un groupe:
+                        <h3>Creer un groupe:</h3>
                     </label>
                     <input class="form-control" placeholder="Entrer un nom de groupe" type="text" name="groupe" id="groupe" value="">
                 </div>
@@ -21,7 +21,7 @@
     </div>    
     <div class="row">
         <div class="col-lg-6">
-            Ou alors, creer un contact:
+            <h3>Ou bien, creer un contact:</h3>
             <form method="post" name="form_contact" id="form_contact" action="/sms/creation/carnet/contact" onclick="verifAutreContact()">
                 <div class="form-group">
                     <label for="nom">
