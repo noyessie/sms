@@ -136,7 +136,7 @@ class CarnetController extends BackController {
             $forme[] = 'numero3';
             $result = $fichier->traiteFichier($config->get('cheminDossierReception').$config->get('nomFichier').$nombre.'.csv', $forme);
             //on passe a la validation tous les champs de tous les contacts
-            var_dump($result);
+            //var_dump($result);
             $flag = false;
             $tabContacts = array();
             foreach ($result as $elem) {
@@ -165,6 +165,7 @@ class CarnetController extends BackController {
                 }else
                 {
                     $contactTo['groupe']=$http->postData('inputAutreUploadGroupe');
+                    //on enregistre le nouveau groupe
                 }
                 
                 $this->saveContact($contactTo);
@@ -241,11 +242,10 @@ class CarnetController extends BackController {
             $numero[] = $contactTo['numero3'];;
         }
         $contact['numero'] = $numero;
-        $manager->create($contact);
+        
         //on passe au mapping sur le groupe
         //recherche de l'id du contact
-        $r=$manager->find(array('nom'=>$contactTo['nom'], 'prenom'=>$contactTo['prenom'], 'email'=>$contactTo['email']));
-        $idcontact=$r[0]->getId();
+        $idcontact=$manager->create($contact);;
         //var_dump($idcontact);
         //recherche de l'id du groupe
         $manager=$this->managers->getManagerOf('Groupe');

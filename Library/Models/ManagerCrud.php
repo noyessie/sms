@@ -97,7 +97,7 @@ class ManagerCrud extends Manager
 
 	public function modify(Entity $entity){
 		$sql = "INSERT INTO " . $this->table_name ." SET ";
-		$sql .= map();
+		$sql .= $this->map();
 		$sql = $sql . " WHERE " . $this->mapping['id'] . " =:id ";
 		$query = $this->dao->prepare($sql);
 		$query = $this->bindValue($query , $entity);

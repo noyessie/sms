@@ -7,6 +7,7 @@ use Library\Models\SMSManager_PDO;
 use Library\Models\ContactManager_PDO;
 use Library\Managers;
 use Library\PDOFactory;
+use Library\Utilities;
 class SMSHasContactManager_PDO extends ManagerCrud{
 
 	public function __construct($dao){
@@ -22,8 +23,9 @@ class SMSHasContactManager_PDO extends ManagerCrud{
 	}
 
 	public function bindValue($query , Entity $entity){
-		foreach($this->$mapping as $key=>$val){
-			if($key != 'status' && $key != 'id'){
+            Utilities::print_table($query);
+		foreach($this->mapping as $key=>$val){
+			if($key != 'status' && $key != 'id' && $key != 'dateEnvoie'){
 				$query->bindValue($key , $entity[$key]['id']);
 			}else{
 				$query->bindValue($key , $entity[$key]);
@@ -45,6 +47,7 @@ class SMSHasContactManager_PDO extends ManagerCrud{
                     $element=new $p();
                         $element['id'] = $r['id'];
 			$element['status']=$r['status'];
+                        $element['dateEnvoie']=$r['dateEnvoie'];
 			$element['sms'] = $sms_manager->find(array('id'=>$r['sms']))[0];
 			$element['contact'] = $contact_manager->find(array('id'=>$r['contact']))[0];
 			$data[] = $element;

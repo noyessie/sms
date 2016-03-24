@@ -5,8 +5,6 @@
     <?php if (isset($message)) : ?>
         <div class="alert alert-success"><?= $message; ?></div>
     <?php endif; ?>
-    <br>
-    <br>
     <div class="page-header">
                 <h1 id="timeline">Acceuil</h1>
             </div>
@@ -24,7 +22,16 @@
                             <p>
                                 <i class="fa fa-check text-success"></i>Nombre de sms envoyes: <?=$r['nbSMSE'];?>
                                 <br>
-                                <i class="fa fa-exclamation-triangle text-danger"></i>Nombre de sms echoues: <?=$r['nbSMSN'];?> <a href="/sms/home/<?=$r['dateBrut'];?>"><i class="fa fa-mail-forward"></i>en   </a> <span> </span>
+                                <i class="fa fa-exclamation-triangle text-danger"></i>Nombre de sms echoues: <?=$r['nbSMSN'];?> 
+                                 <?php
+                                 if($r['nbSMSN']!=0):
+                            ?>
+                                <a href="/sms/home/<?=$r['dateBrut'];?>"><i class="fa fa-mail-forward"></i>renvoyer   </a> <span> </span>
+                               <?php
+                                 else:
+                                     
+                                 endif;
+                            ?> 
                             </p>
                         </div>
                     </div>
