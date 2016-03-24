@@ -9,13 +9,26 @@
             </div>
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
-                    <li class="active"><a href="/sms/home/"><i class="fa fa-home"></i>Home</a></li>
-                    <li><a href="/sms/home/"><i class="fa fa-tasks"></i>Ecrire un sms</a></li>
+                    <li class="active"><a href="/sms/home/"><i class="fa fa-home"></i> Home</a></li>
+                    <li><a href="/sms/home/"><i class="fa fa-tasks"></i> Ecrire un sms</a></li>
                     <li><a href="/sms/creation/carnet/index"><i class="fa fa-pencil"></i> Gerer le carnet d'adresses</a></li>
                     <li><a href="/sms/settings/"><i class="fa fa-cog"></i> Parametres </a></li>
                     <li><a href="/sms/authentification/logout/"><i class="fa fa-power-off"></i> Se deconnecter </a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right navbar-user">
+                    <li class="dropdown messages-dropdown">
+                        <?php 
+                        $api=new \Library\Api();
+                        $config=new \Library\Config($this->app());
+                        //$credit=$api->getCredit('patricksanang', 'cYiTdXqX');
+                        $credit=$api->getCredit($config->get('usernameAPI'), $config->get('passwordAPI'));
+            
+                        $credit=$credit/1000;
+                        ?>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-envelope"></i> Il vous reste: <?=$credit;?> sms </a>
+                        
+                    </li>
+                    
                      <li class="dropdown user-dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Bonjour <?= isset($user) ? $user : 'user' ?><b class="caret"></b></a>
                         <ul class="dropdown-menu">

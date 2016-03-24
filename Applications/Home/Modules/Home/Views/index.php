@@ -11,20 +11,27 @@
                 <h1 id="timeline">Acceuil</h1>
             </div>
             <ul class="timeline">
-                <li>
-                    <div class="timeline-badge info"><i class="fa fa-mail-forward"></i></div>
+                <?php
+                    foreach ($results as $r):
+                            ?>
+                    <li>
                     <div class="timeline-panel">
                         <div class="timeline-heading">
-                            <h4 class="timeline-title">Envoyer un sms</h4>                            
+                            <h4 class="timeline-title"><span><i class="fa fa-clock-o fa-2x"></i><?=$r['date'];?></span></h4>                            
                             <hr />
                         </div>
                         <div class="timeline-body">
                             <p>
-                                
+                                <i class="fa fa-check text-success"></i>Nombre de sms envoyes: <?=$r['nbSMSE'];?>
+                                <br>
+                                <i class="fa fa-exclamation-triangle text-danger"></i>Nombre de sms echoues: <?=$r['nbSMSN'];?> <a href="/sms/home/<?=$r['dateBrut'];?>"><i class="fa fa-mail-forward"></i>en   </a> <span> </span>
                             </p>
                         </div>
                     </div>
-                </li>
+                    </li>
+                <?php endforeach; ?>
+                        
+                
             </ul>
     </div>
 </div>

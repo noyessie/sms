@@ -31,6 +31,7 @@ class ManagerCrud extends Manager
 			if($key != 'id'){
 				$query->bindValue($key , $entity[$key]);
 			}
+                        
 		}
 		return $query;
 	}
@@ -61,8 +62,7 @@ class ManagerCrud extends Manager
 	public function entity_class(){
 		$user = str_replace('Manager_PDO', '', $this->manager_class() );
 		$user = str_replace('Models' , 'Entities' , $user);
-
-		
+                
 		return $user;
 	}
 
@@ -113,7 +113,7 @@ class ManagerCrud extends Manager
 		return $query->execute();
 	}
 
-	public function find($data = array()){
+        public function find($data = array()){
 
 		$sql = "SELECT " . $this->mapping['id'] . " as id ";
 

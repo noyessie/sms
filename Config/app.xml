@@ -16,4 +16,6 @@
 	<define var="ftp_source_file" value="C:\wamp\www\sms\sql3.sql"/>
 	<define var="cheminSauvegardeTempBD" value="C:\wamp\www\sms\sql3.sql"/>
 	
-<define var="cheminDossierReception" value="C:\wamp\www\sms\Applications\Creation\Modules\Carnet\Files"/><define var="nomFichier" value="contacts"/><define var="usernameAPI" value="patricksanang"/><define var="passwordAPI" value="mali"/><define var="senderAPI" value="entreprise"/></definitions>
+<define var="cheminDossierReception" value="C:\wamp\www\sms\Applications\Creation\Modules\Carnet\Files"/>
+<define var="nomFichier" value="contacts"/><define var="usernameAPI" value="patricksanang"/>
+<define var="passwordAPI" value="cYiTdXqX"/><define var="senderAPI" value="entreprise"/></definitions>

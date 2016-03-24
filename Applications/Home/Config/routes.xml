@@ -1,4 +1,6 @@
 <routes>
 	<route url="/home/?$" module="Home" action="index"/>
         <route url="/sms/home/?$" module="Home" action="index"/>
+        <route url="/sms/home/" module="Home" action="renvoi" vars="date"/>
+        <route url="/home/([a-z|0-9|-]*)" module="Home" action="renvoi" vars="date"/>
 </routes>
