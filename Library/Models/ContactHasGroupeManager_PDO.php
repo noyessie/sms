@@ -16,34 +16,14 @@ class ContactHasGroupeManager_PDO extends ManagerCrud{
 	}
 
 
-	public function map(){
-		$sql = "";
 
-		foreach($this->mapping as $key=>$val){
-			if($key != 'id'){
-				if($key == 'dateEnvoie'){
-					$sql = $sql . " " . $val . "=FROM_UNIX_TIMESTAMP(:" . $key . ") ,";
-					
-				}else{
-					$sql = $sql . " " . $val . "=:" . $key . " ,";
-					
-				}
-			}
-		}
-		$sql[strlen($sql)-1]=';';
-
-
-		return $sql;
-	}
 
 	public function bindValue($query , Entity $entity){
 		
-				
+		
         foreach($this->mapping as $key=>$val){
 			if($key != 'id'){
              	$query->bindValue($key , $entity[$key]['id']);
-			}else{
-	        	$query->bindValue($key , $entity[$key]);
 			}
 		}
 		return $query;

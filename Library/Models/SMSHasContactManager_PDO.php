@@ -41,6 +41,8 @@ class SMSHasContactManager_PDO extends ManagerCrud{
 		return $sql;
 	}
 
+	
+
 	public function bindValue($query , Entity $entity){
 
             Utilities::print_table($query);

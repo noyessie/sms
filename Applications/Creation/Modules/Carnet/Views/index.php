@@ -7,6 +7,8 @@
     <div class="row">
         <div class="col-lg-6">
             <form role="form" method="post" id="groupe" action="/sms/creation/carnet/groupe">
+                <input type="hidden" name="create">
+
                 <div class="form-group">
                     <label for="groupe">
                         <h3>Creer un groupe:</h3>
@@ -21,8 +23,10 @@
     </div>    
     <div class="row">
         <div class="col-lg-6">
-            <h3>Ou bien, creer un contact:</h3>
+            <h3>Ou bien, creer un contact :</h3>
             <form method="post" name="form_contact" id="form_contact" action="/sms/creation/carnet/contact" onclick="verifAutreContact()">
+                <input type="hidden" name="create">
+
                 <div class="form-group">
                     <label for="nom">
                         Nom:
@@ -50,7 +54,7 @@
                         foreach ($groups as $group):
                             $groupName = $group->getNom();
                             ?>
-                            <option value="<?= $groupName; ?>"><?= $groupName; ?></option>		
+                            <option value="<?=$group['id']?>"><?= $groupName; ?></option>		
                         <?php endforeach; ?>
                         <option value="value0"> Autre </option>
                     </select>
@@ -64,19 +68,19 @@
                     <label for="number1">
                         Tel1:
                     </label> 
-                    <input class="form-control" id="number1" type="number" name="number1" value="">
+                    <input class="form-control" id="number1" type="number" name="numero[]" value="">
                 </div>
                 <div class="form-group">
                     <label for="number2">
                         Tel2:
                     </label> 
-                    <input class="form-control" id="number1" type="number" name="number2" value="">
+                    <input class="form-control" id="number1" type="number" name="numero[]" value="">
                 </div>
                 <div class="form-group">
                     <label for="number3">
                         Tel3:
                     </label> 
-                    <input class="form-control" id="number1" type="number" name="number3" value="">
+                    <input class="form-control" id="number1" type="number" name="numero[]" value="">
                 </div>
                 <input class="btn btn-primary" type="submit" value="Creer">
             </form>    
@@ -88,6 +92,8 @@
             D'abord, selectionner un groupe:
             <form action="/sms/creation/carnet/upload/contacts" method="post" id="form_uploadContact" name="form_uploadContact"
                   enctype="multipart/form-data" onclick="verifAutreUploadContact()">
+                <input type="hidden" name="create">
+
                 <div class="form-group">
                     <label for="groupeUploadContact">
                         Groupe:
