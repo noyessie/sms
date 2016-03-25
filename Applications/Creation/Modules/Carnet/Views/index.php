@@ -74,7 +74,7 @@
                 </div>
                 <div class="form-group">
                     <label for="number3">
-                        Tel1:
+                        Tel3:
                     </label> 
                     <input class="form-control" id="number1" type="number" name="number3" value="">
                 </div>

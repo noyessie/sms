@@ -24,6 +24,25 @@
     <?php endif; 
         unset($_SESSION['success_message']);
     ?>
+    <?php 
+    if (isset($_SESSION['alert_message'])) : ?>
+        
+        <div class="alert alert-danger">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+              <?= $_SESSION['alert_message']; ?></div>
+    <?php endif; 
+        unset($_SESSION['alert_message']);
+    ?>
+           <?php 
+    if (isset($_SESSION['info_message'])) : ?>
+        
+        <div class="alert alert-success">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+              <?= $_SESSION['info_message']; ?></div>
+    <?php endif; 
+        unset($_SESSION['info_message']);
+    ?>
+    
         
         <?=$content;?>        
         </div>

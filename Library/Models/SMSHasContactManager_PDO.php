@@ -42,13 +42,13 @@ class SMSHasContactManager_PDO extends ManagerCrud{
 	}
 
 	public function bindValue($query , Entity $entity){
+
+            Utilities::print_table($query);
 		foreach($this->mapping as $key=>$val){
-			if($key != 'id'){
-				if($key != 'status' && $key != 'dateEnvoie'){
-					$query->bindValue($key , $entity[$key]['id']);
-				}else{
-					$query->bindValue($key , $entity[$key]);
-				}
+			if($key != 'status' && $key != 'id' && $key != 'dateEnvoie'){
+				$query->bindValue($key , $entity[$key]['id']);
+			}else{
+				$query->bindValue($key , $entity[$key]);
 			}
 		}
 
@@ -67,6 +67,7 @@ class SMSHasContactManager_PDO extends ManagerCrud{
 
             $element['id'] = $r['id'];
 			$element['status']=$r['status'];
+                        $element['dateEnvoie']=$r['dateEnvoie'];
 			$element['sms'] = $sms_manager->find(array('id'=>$r['sms']))[0];
 			$element['contact'] = $contact_manager->find(array('id'=>$r['contact']))[0];
 			$element['dateEnvoie'] = $r['dateEnvoie'];

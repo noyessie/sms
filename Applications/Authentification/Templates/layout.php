@@ -51,8 +51,8 @@
                     </div>
                     <div class="row">
                         <div class="col-md-8 col-md-offset-4"> Noyessie Hubert (ENSP, GI, promotion 2017) </div>
-                        <div class="col-md-8 col-md-offset-4"> <b> Tel : </b> 698-158-390 </div>
-                        <div class="col-md-8 col-md-offset-4"> <b> Email : </b> patrick.sanang@gmail.com</div>
+                        <div class="col-md-8 col-md-offset-4"> <b> Tel : </b> 695-749-759 </div>
+                        <div class="col-md-8 col-md-offset-4"> <b> Email : </b> hubertnoyessie@gmail.com</div>
                     </div>
 
                 </div>

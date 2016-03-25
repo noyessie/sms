@@ -32,7 +32,7 @@ class Router
                     {
                         //echo "has var !";
                         $varsNames = $route->varsNames();
-                        print_r($varsNames);
+//                        print_r($varsNames);
                         $listVars = array();
 
                         //on crée un nouveau tableau clé/Valeur.
@@ -44,7 +44,7 @@ class Router
                         }
 
                         //on assigne ce tableau de variable à la route
-                        print_r($listVars);
+  //                      print_r($listVars);
                         $route->setVars($listVars);
                     }
                     return $route;
