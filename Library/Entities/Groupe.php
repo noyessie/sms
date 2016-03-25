@@ -9,7 +9,6 @@ class Groupe extends Entity{
 
 
 
-
     /**
      * Gets the value of nom.
      *
@@ -30,6 +29,30 @@ class Groupe extends Entity{
     protected function setNom($nom)
     {
         $this->nom = $nom;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of contacts.
+     *
+     * @return mixed
+     */
+    public function getContacts()
+    {
+        return $this->contacts;
+    }
+
+    /**
+     * Sets the value of contacts.
+     *
+     * @param mixed $contacts the contacts
+     *
+     * @return self
+     */
+    protected function setContacts($contacts)
+    {
+        $this->contacts = $contacts;
 
         return $this;
     }

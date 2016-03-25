@@ -14,4 +14,5 @@ abstract class Manager
     {
         $this->dao = $dao;
     }
+
 }

@@ -6,5 +6,5 @@ use Library\Utilities;
 foreach($sms as $c):
 	Utilities::print_table($c);
 ?>
-<h3><a href="<?=$c['id']?>/delete/"> delete numero <?= $c['corps']?></a></h3>
+<h3><a href="<?=$c['id']?>/delete/"> delete message <?= $c['corps']?></a></h3>
 <?php endforeach;?>
