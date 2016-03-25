@@ -9,8 +9,10 @@ use Library\Config;
 use Library\Entities\Groupe;
 use Library\Entities\ContactHasGroupe;
 use Library\Entities\Contact;
+use Library\Entities\Numero;
 use Library\Fichier;
 use Library\Upload;
+use Library\Utilities;
 
 /**
  * classe permettant de creer les differents elements:
@@ -62,44 +64,78 @@ class CarnetController extends BackController {
      * methode permettant d'enregistrer un contact
      */
     public function executeCreercontact(HTTPRequest $http) {
+
+
+
         $control = new \Library\Controls();
         $erreur = array();
-        $erreur[] = $control->validationChamp($http->postData('nom'));
-        //$erreur[]=$control->validationNumTel('00237',$http->postData('number1'));
-        if ($http->postExists('number2')) {
-            //  $erreur[]=$control->validationNumTel('00237',$http->postData('number2'));            
-        }
-        if ($http->postExists('number3')) {
-            //$erreur[]=$control->validationNumTel('00237',$http->postData('number3'));        
-        }
-        $flag = false;
-        if (!$http->postExists('groupeContact')) {
-            $erreur[] = $control->validationChamp($http->postData('inputAutreGroupe'));
-            $flag = true;
-        }
-        if ($control->estVideTab($erreur)) {
-            //on peut proceder a la suite
-            //echo 'on entre!';
-            //on hydrate un bean qui va se charger de recuperer les infos et de faire la verification
-            //
-            if ($flag) {
-                $group['nom'] = $http->postData('inputAutreGroupe');
-            } else {
-                $group['nom'] = $http->postData('groupeContact');
+
+        try{
+
+            if($http->postExists('create')){
+                $this->managers->beginTransaction();
+
+                $manager = $this->managers->getManagerOf('Contact');
+                $numeroManager = $this->managers->getManagerOf('Numero');
+                $groupeManager = $this->managers->getManagerOf('Groupe');
+                $contactHasGroupeManager = $this->managers->getManagerOf('ContactHasGroupe');
+
+                //on cree le contact
+                $contact = new Contact();
+                $contact['nom'] = $http->postData('nom');
+                $erreur[] = $control->validationChamp($contact['nom']);
+                $contact['prenom'] = $http->postData('prenom');
+                $contact['email'] = $http->postData('email');
+                $id = $manager->create($contact);
+
+                //Utilities::print_s("creation de contact ok");
+
+                //on enregister les numeros
+                $numeros = $http->postData('numero');
+                foreach($numeros as $numero){
+                    if(strlen($numero) > 0){
+                        $num = new Numero();
+                        $num['idContact'] = $id;
+                        $num['numero'] = $numero;
+                        $numeroManager->create($num);
+                    }
+                }
+
+                //Utilities::print_s("creation de numeros ok");
+                
+
+                //on cree le groupe
+                if($http->postExists('inputAutreGroupe') && strlen($http->postData('inputAutreGroupe'))){
+                    $groupe = new Groupe();
+                    $groupe['nom'] = $http->postData('inputAutreGroupe');
+                    $groupeManager->create($groupe);
+                }else{
+                    $groupe = $groupeManager->get($http->postData('groupeContact'));
+                    if($groupe['id'] <= 0){
+                        throw new \Exception('groupe invalide ' . $http->postData('groupeContact'));
+                    }
+                }
+
+                //on sauvegarder le groupe
+                $contactHasGroupe = new ContactHasGroupe();
+                $contactHasGroupe['contact'] = $contact;
+                $contactHasGroupe['groupe'] = $groupe;
+
+                $contactHasGroupeManager->create($contactHasGroupe);
+                //Utilities::print_s("lien entre contact et groupe  ok");
+
+                $_SESSION['success_message']="Contact crée avec succès!";
+                $this->managers->commit();
+
+                $this->app()->httpResponse()->redirect('home/contacts/');
+
             }
-            $contactTo=array();
-            $contactTo['nom']=$http->postData('nom');
-            $contactTo['prenom']=$http->postData('prenom');
-            $contactTo['email']=$http->postData('email');
-            $contactTo['numero1']=$http->postData('number1');
-            $contactTo['numero2']=$http->postData('number2');
-            $contactTo['numero3']=$http->postData('number3');
-            $contactTo['groupe']=$group['nom'];
-            $this->saveContact($contactTo);
-            // on se redirige
-            $_SESSION['success_message']="Contact crée avec succès!";
-            $this->app()->httpResponse()->redirect('home/');
+        }catch(\Exception $e){
+            $this->managers->roolBack();
+            $erreur[] = $e->getMessage();
         }
+
+
         $resultErreur = '';
         foreach ($erreur as $r) {
             $resultErreur = $resultErreur . PHP_EOL . $r;

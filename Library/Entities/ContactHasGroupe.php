@@ -5,9 +5,11 @@ use Library\Entities\Groupe;
 use Library\Entities\Contact;
 
 class ContactHasGroupe extends Entity{
-	protected $idgroupe;
+	protected $groupe;
 
-    protected $idcontact;
+    protected $contact;
+
+    
 
     
 
@@ -16,9 +18,9 @@ class ContactHasGroupe extends Entity{
      *
      * @return mixed
      */
-    public function getIdgroupe()
+    public function getGroupe()
     {
-        return $this->idgroupe;
+        return $this->groupe;
     }
 
     /**
@@ -28,9 +30,9 @@ class ContactHasGroupe extends Entity{
      *
      * @return self
      */
-    protected function setIdgroupe($idgroupe)
+    protected function setGroupe(Groupe $groupe)
     {
-        $this->idgroupe = $idgroupe;
+        $this->groupe = $groupe;
 
         return $this;
     }
@@ -40,9 +42,9 @@ class ContactHasGroupe extends Entity{
      *
      * @return mixed
      */
-    public function getIdcontact()
+    public function getContact()
     {
-        return $this->idcontact;
+        return $this->contact;
     }
 
     /**
@@ -52,9 +54,9 @@ class ContactHasGroupe extends Entity{
      *
      * @return self
      */
-    protected function setIdcontact($idcontact)
+    protected function setContact(Contact $contact)
     {
-        $this->idcontact = $idcontact;
+        $this->contact = $contact;
 
         return $this;
     }

@@ -1,8 +1,16 @@
 <?php
 namespace Library;
 
+
 class Api{
-function envoi($username, $password, $sender, $body, $recipients) {
+
+    const SUCCESS = "success";
+    const AUTH_FAILED = "auth_failed";
+    const XML_ERROR = "NOT_ENOUGH_CREDITS";
+    const NO_RECIPIENTS = "NO_RECIPIENTS";
+    const GENERAL_ERROR = "GENERAL_ERROR";
+
+public static function envoi($username, $password, $sender, $body, $recipients) {
     // GlobexCamSMS's POST URL
     $postUrl = "http://193.105.74.59/api/sendsms/xml";
     // XML-formatted data
@@ -41,25 +49,28 @@ function envoi($username, $password, $sender, $body, $recipients) {
     $response = curl_exec($ch);
     curl_close($ch);
     $objresponse=simplexml_load_string($response);
+    if(!isset($objectresponse)){
+        return Api::GENERAL_ERROR;
+    }
     
     
-    if($objresponse->status>0)
+    if($objresponse->status > 0)
     {
-        return "success";
+        return Api::SUCCESS;
     }else
     {
         switch($objresponse->status)
         {
             case -1: 
-                return "AUTH_FAILED";
+                return Api::AUTH_FAILED;
             case -2: 
-                return "XML_ERROR";
+                return Api::XML_ERROR;
             case -3: 
-                return "NOT_ENOUGH_CREDITS";
+                return Api::NOT_ENOUGH_CREDITS;
             case -4: 
-                return "NO_RECIPIENTS";
+                return Api::NO_RECIPIENTS;
             default: 
-                return "GENERAL_ERROR";
+                return Api::GENERAL_ERROR;
         }
     }
 }/**

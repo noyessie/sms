@@ -25,4 +25,17 @@ class Managers{
 		}
 		return $this->managers[$module];
 	}
+
+
+    public function beginTransaction(){
+    	$this->dao->beginTransaction();
+    }
+
+    public function commit(){
+    	$this->dao->commit();
+    }
+
+    public function roolBack(){
+    	$this->dao->rollBack();
+    }
 }

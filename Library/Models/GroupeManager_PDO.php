@@ -1,6 +1,7 @@
 <?php
 namespace Library\Models;
 use Library\Entities\Groupe;
+use Library\Utilities;
 
 class GroupeManager_PDO extends ManagerCrud{
 

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <center><h2>liste des contacts</h2></center>
     <br>
     
@@ -82,3 +83,10 @@
     
     <center>
     
+=======
+<?php
+use Library\Utilities;
+
+Utilities::print_table($contacts);
+?>
+>>>>>>> 18a70eae7e8644616d6fbe041ebb163ed1cb85a3

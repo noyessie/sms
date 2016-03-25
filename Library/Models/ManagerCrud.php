@@ -3,6 +3,14 @@ namespace Library\Models;
 use Library\Entity;
 use Library\Manager;
 use Library\Utilities;
+use Library\Entities\Contact;
+use Library\Entities\ContactHasGroupe;
+use Library\Entities\Groupe;
+use Library\Entities\Numero;
+use Library\Entities\SMS;
+use Library\Entities\SMSHasContact;
+use Library\Entities\User;
+
 /**
  * Description of Manager
  *
@@ -59,6 +67,7 @@ class ManagerCrud extends Manager
 		return get_class($this);
 	}
 
+
 	public function entity_class(){
 		$user = str_replace('Manager_PDO', '', $this->manager_class() );
 		$user = str_replace('Models' , 'Entities' , $user);
@@ -82,16 +91,18 @@ class ManagerCrud extends Manager
 		$sql = "INSERT INTO " . $this->table_name ." SET ";
 		$sql .= $this->map();
 		$query = $this->dao->prepare($sql);
-                $query = $this->bindValue($query , $entity);
+
+        $query = $this->bindValue($query , $entity);
 
 //		Utilities::print_table($query);
 		$id=0;
-                try {
-                    $id =  $query->execute() ? $this->dao->lastInsertId() : 0;
-		
-                } catch (\PDOException $ex) {
-                    
-                }
+		try{
+    		$id =  $query->execute() ? $this->dao->lastInsertId() : 0;
+		}catch(\Exception $e){
+			Utilities::print_table($query);
+			throw new \Exception("Query faill !!! " . $e->getMessage());
+		}    
+		$entity['id'] = $id;
 		return $id;
 	}
 
@@ -113,7 +124,7 @@ class ManagerCrud extends Manager
 		return $query->execute();
 	}
 
-        public function find($data = array()){
+    public function find($data = array()){
 
 		$sql = "SELECT " . $this->mapping['id'] . " as id ";
 
@@ -134,15 +145,15 @@ class ManagerCrud extends Manager
 				}
 			}
 		}
+		$sql .= ' ORDER BY(id) DESC';
 		$sql .=";";
 
 
-/*		Utilities::print_s("find query  : " );
+	/*		Utilities::print_s("find query  : " );
 		Utilities::print_s($sql);*/
 		$query = $this->dao->prepare($sql);
-		foreach($data as $key=>$d){
-			$query->bindValue($key , $d);
-		}
+		$query = $this->bind_search($query , $data);
+		
 		$query->execute();
 
 		
@@ -150,15 +161,20 @@ class ManagerCrud extends Manager
 
 	}
 
-	public function get($id=0){
-		if(!is_numeric($id)){
-			return new Numero();
+	public function bind_search($query , $data){
+		foreach($data as $key=>$d){
+			$query->bindValue($key , $d);
 		}
+		return $query;
+	}
+
+	public function get($id=0){
+		$class = $this->entity_class();
 		$result = $this->find(array('id'=>$id));
 		if(count($result)>0){
 			return $result[0];
 		}else{
-			return new Numero();
+			return new $class;
 		}
 	}
 }

@@ -3,7 +3,7 @@
 <?php
 use Library\Utilities;
 
-foreach($sms as $c):
+foreach($contacts as $c):
 	Utilities::print_table($c);
 ?>
 <h3><a href="<?=$c['id']?>/delete/"> delete user <?= $c['nom']?></a></h3>
