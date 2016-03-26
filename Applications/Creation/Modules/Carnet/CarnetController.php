@@ -124,7 +124,7 @@ class CarnetController extends BackController {
                 $contactHasGroupeManager->create($contactHasGroupe);
                 //Utilities::print_s("lien entre contact et groupe  ok");
 
-                $_SESSION['success_message']="Contact crée avec succès!";
+                $_SESSION['success_message']="Contact cree avec succes!";
                 $this->managers->commit();
 
                 $this->app()->httpResponse()->redirect('home/contacts/');
@@ -162,7 +162,7 @@ class CarnetController extends BackController {
         $erreur = '';
         //puis on enregistre les elements dans la bd
         if ($resultUpload) {
-            echo 'on arrice ic';
+            //echo 'on arrice ic';
             $forme = array();
             $forme[] = 'nom';
             $forme[] = 'prenom';

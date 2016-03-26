@@ -5,7 +5,7 @@ use Library\HTTPRequest;
 use Library\Entities\Numero;
 use Library\Utilities;
 
-class NumeroController extends BackControllerSecure{
+class NumeroController extends BackController{
 	
 	public function executeIndex(HTTPRequest $http){
 		$manager = $this->managers->getManagerOf('Numero');

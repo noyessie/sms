@@ -1,6 +1,9 @@
 /* Deep Blue Admin Bootstrap Theme by PrepBootstrap - http://www.prepbootstrap.com */
 body {
   margin-top: 70px;
+  width: 90%;
+  margin-right: auto;
+  margin-left: auto;
 }
 #wrapper {
   padding-left: 0;

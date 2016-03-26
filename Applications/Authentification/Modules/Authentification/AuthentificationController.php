@@ -46,7 +46,7 @@ class AuthentificationController extends BackController{
                     {
                             //c'est ok!
                             //on continue dans la plateforme
-                            
+                            $_SESSION['user']=$userResult['nom'];
                             $this->app()->httpResponse()->redirect('home/');
                         break;
                     }

@@ -4,6 +4,7 @@ use Library\BackController;
 use Library\HTTPRequest;
 use Library\Entities\SMS;
 use Library\Entities\Contact;
+use Library\Entities\Numero;
 use Library\Entities\ContactHasGroupe;
 use Library\Entities\SMSHasContact;
 use Library\Api;
@@ -95,7 +96,8 @@ class SMSController extends BackController{
 						//envoie du message
 						if($envoie){
 							Utilities::print_s('envoie du message : ' . $corps);
-							$sms_status = Api::envoi('' , '' , 'NEO' , $corps , array($numero['numero'])) == Api::SUCCESS ? true : false;
+							$config=new \Library\Config($this->app());
+                                                        $sms_status = Api::envoi($config->get('usernameAPI') , $config->get('passwordAPI') , $config->get('senderAPI') , $corps , array($numero['numero'])) == Api::SUCCESS ? true : false;
 						}
 						$message_envoyer[] = $corps;
 					}
@@ -144,13 +146,13 @@ class SMSController extends BackController{
 
 	public function executeDelete(HTTPRequest $http){
 		$id = $http->getData('id');
-		$manager = $this->managers->getManagerOf('Numero');
-		$numero = new Numero();
-		$numero['id'] = $id;
+		$manager = $this->managers->getManagerOf('SMS');
+		$sms = new SMS();
+		$sms['id'] = $id;
 
-		$manager->delete($numero);
+		$manager->delete($sms);
 
-		$this->app()->httpResponse()->redirect('test/numero/');
+		$this->app()->httpResponse()->redirect('test/message/');
 
 	}
 

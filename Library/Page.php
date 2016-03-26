@@ -51,8 +51,8 @@ class Page extends ApplicationComponent
 
 		ob_start();
                 //on change un tout petit peu la philosopie de chargement des vues
-                $_SESSION['user']='patrick';
-                $user=$_SESSION['user'];
+                //$_SESSION['user']='patrick';
+                //$user=$_SESSION['user'];
                 //chargement du header
                 $flag=file_exists(__DIR__.'/../Applications/'.
 			$this->app->name().'/Templates/header.php');
