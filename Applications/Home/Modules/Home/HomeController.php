@@ -50,7 +50,7 @@ class HomeController extends BackController {
             //echo 'testdebut';
             //var_dump($temp);
             //echo 'testfin';
-            if ($s->getDateEnvoie() == null) {
+            if (($s->getDateEnvoie() == null)||($s->getDateEnvoie() == '0000-00-00 00:00:00')||(($s->getDateEnvoie() == ''))) {
                 $nbN++;
             } else {
                 $nbE++;

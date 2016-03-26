@@ -36,11 +36,7 @@ class Backup {
      */
     public function save($ftp_server, $login, $password, $destination_file, $source_file) {
         $connect = ftp_connect($ftp_server);
-        if (ftp_login($connect, $login, $password)) {
-            echo "Connecté en tant que $login sur $ftp_server<br>";
-        } else {
-            echo "Connexion impossible en tant que " . $login . "<br>";
-        }
+        ftp_login($connect, $login, $password);
         $upload = ftp_put($connect, "$destination_file", "$source_file", FTP_ASCII);
         return $upload;
         /*if (!$upload) {
