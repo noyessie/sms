@@ -6,7 +6,7 @@ class PDOFactory
 	protected static $db = '';
 	public static function getMysqlConnexion(){
 		if(PDOFactory::$db == ''){
-			PDOFactory::$db = new \PDO('mysql:dbname=mydb','root','' , array(\PDO::ATTR_PERSISTENT => true));
+			PDOFactory::$db = new \PDO('mysql:dbname=mydb','dev','' , array(\PDO::ATTR_PERSISTENT => true));
 			PDOFactory::$db->setAttribute(\PDO::ATTR_ERRMODE , \PDO::ERRMODE_EXCEPTION);
 		}
 		return PDOFactory::$db;

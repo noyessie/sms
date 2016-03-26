@@ -7,14 +7,21 @@
 
 <form action="" method="post" accept-charset="utf-8">
 	<input type="hidden" name = "create"/>
+	<label for="groupe">Selectionnez le groupe : </label>
 	<select name="groupe" id="">
 		<?php foreach($groupes as $g):?>
 			<option value="<?=$g['id']?>"><?=$g['nom']?></option>
 		<?php endforeach; ?>
-			<option value="0">Public</option> 
-	</select><br>
+			<option value="0" selected>Public</option> 
+	</select><br><br>
+
+	<label for="message">Veuillez entre votre message</label>
 	<textarea placeholder="Veuillez saisir votre message" rows="20" name="message" id="comment_text" cols="40" class="ui-autocomplete-input" autocomplete="on" role="textbox" aria-autocomplete="list" aria-haspopup="true"></textarea><br>
+
+	<label for="send">Send a message</label>
 	<input type="checkbox" name='send'/>
+
+	
 	<input type="submit" value="envoyer">;
 </form>
 

@@ -97,7 +97,8 @@ class SMSController extends BackController{
 						if($envoie){
 							Utilities::print_s('envoie du message : ' . $corps);
 							$config=new \Library\Config($this->app());
-                                                        $sms_status = Api::envoi($config->get('usernameAPI') , $config->get('passwordAPI') , $config->get('senderAPI') , $corps , array($numero['numero'])) == Api::SUCCESS ? true : false;
+							$sms_status = false;
+                            //$sms_status = Api::envoi($config->get('usernameAPI') , $config->get('passwordAPI') , $config->get('senderAPI') , $corps , array($numero['numero'])) == Api::SUCCESS ? true : false;
 						}
 						$message_envoyer[] = $corps;
 					}

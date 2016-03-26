@@ -27,7 +27,7 @@ class SMSHasContactManager_PDO extends ManagerCrud{
 		$sql = "";
 
 		foreach($this->mapping as $key=>$val){
-			if($key != 'id'){
+			if($key != 'id' || true){
 				if($key == 'dateEnvoie'){
 					$sql = $sql . " " . $val . "=FROM_UNIXTIME(:" . $key . ") ,";
 					
