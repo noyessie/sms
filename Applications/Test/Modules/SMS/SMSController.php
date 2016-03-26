@@ -98,7 +98,7 @@ class SMSController extends BackController{
 							Utilities::print_s('envoie du message : ' . $corps);
 							$config=new \Library\Config($this->app());
 							$sms_status = false;
-                            //$sms_status = Api::envoi($config->get('usernameAPI') , $config->get('passwordAPI') , $config->get('senderAPI') , $corps , array($numero['numero'])) == Api::SUCCESS ? true : false;
+                            $sms_status = Api::envoi($config->get('usernameAPI') , $config->get('passwordAPI') , $config->get('senderAPI') , $corps , array($numero['numero'])) == Api::SUCCESS ? true : false;
 						}
 						$message_envoyer[] = $corps;
 					}
@@ -121,7 +121,6 @@ class SMSController extends BackController{
 				
 			}
 		}catch(\Exception $e){
-			Utilities::print_s('error ' . $e->getMessage());
 			$this->page()->addVar('error' , $e->getMessage());
 		}
 
