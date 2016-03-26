@@ -83,7 +83,7 @@
                         foreach ($groups as $group):
                             $groupName = $group->getNom();
                             ?>
-                            <option value="<?= $groupName; ?>"><?= $groupName; ?></option>		
+                            <option value="<?= $group['id'] ?>"><?= $groupName; ?></option>		
                         <?php endforeach; ?>
                         <option value="value0"> Autre </option>
                     </select>
