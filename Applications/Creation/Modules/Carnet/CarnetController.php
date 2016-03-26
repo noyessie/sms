@@ -160,6 +160,7 @@ class CarnetController extends BackController {
         $upload = new Upload();
         $resultUpload = $upload->uploaderGeneral($config->get('cheminDossierReception'), $config->get('nomFichier').$nombre.'.csv');
         $erreur = '';
+        Utilities::print_table("<hr>");
         //puis on enregistre les elements dans la bd
         if ($resultUpload) {
             //echo 'on arrice ic';
@@ -200,7 +201,7 @@ class CarnetController extends BackController {
                     $contactTo['groupe']=$http->postData('groupeUploadContact');
                 }else
                 {
-                    $contactTo['groupe']=$http->postData('inputAutreUploadGroupe');
+                    $contactTo['autre_groupe']=$http->postData('inputAutreUploadGroupe');
                     //on enregistre le nouveau groupe
                 }
                 
@@ -215,7 +216,7 @@ class CarnetController extends BackController {
                 //
                 //success
                 echo 'success !';
-                $this->app()->httpResponse()->redirect('home/');
+                //$this->app()->httpResponse()->redirect('home/');
             }
         } else {
             $erreur = 'Erreur lors de l\'upload du fichier';
@@ -259,40 +260,94 @@ class CarnetController extends BackController {
     /**
      * methode d'enregistrement d'un contact
      */
-    private function saveContact($contactTo) {
-        $manager = $this->managers->getManagerOf('Contact');
-        $contact = new Contact();
+    private function saveContact($contactTos) {
 
-        $contact['nom'] = $contactTo['nom'];
-        $contact['prenom'] = $contactTo['prenom'];
-        $contact['email'] = $contactTo['email'];
-       // $contact['idUser'] = 1;
-        $numero = array();
-        if (isset($contactTo['numero1'])) {
-            $numero[] = $contactTo['numero1'];;
-        }
-        if (isset($contactTo['numero2'])) {
-            $numero[] = $contactTo['numero2'];;
-        }
-        if (isset($contactTo['numero3'])) {
-            $numero[] = $contactTo['numero3'];;
-        }
-        $contact['numero'] = $numero;
+
+        $control = new \Library\Controls();
+        $erreur = array();
+
+        try{
+
+            
+            for($contactTos as $contactTo){
+                $this->managers->beginTransaction();
+
+                $manager = $this->managers->getManagerOf('Contact');
+                $numeroManager = $this->managers->getManagerOf('Numero');
+                $groupeManager = $this->managers->getManagerOf('Groupe');
+                $contactHasGroupeManager = $this->managers->getManagerOf('ContactHasGroupe');
+
+                //on cree le contact
+                $contact = new Contact();
+                $contact['nom'] = $contactTo['nom'];
+                $erreur[] = $control->validationChamp($contact['nom']);
+                $contact['prenom'] = $contactTo['prenom'];
+                $contact['email'] = $contactTo['email'];
+                $id = $manager->create($contact);
+
+                //Utilities::print_s("creation de contact ok");
+
+                //on enregister les numeros
+                $numeros = array();
+                $numeros[] = $contactTo('numero1');
+                if(isset($contactTo['numero2']))
+                {
+                    $numeros[]=$contactTo['numero2'];
+                }
+                if(isset($contactTo['numero3']))
+                {
+                    $numeros[]=$contactTo['numero3'];
+                }
+                foreach($numeros as $numero){
+                    if(strlen($numero) > 0){
+                        $num = new Numero();
+                        $num['idContact'] = $id;
+                        $num['numero'] = $numero;
+                        $numeroManager->create($num);
+                    }
+                }
+
+                //Utilities::print_s("creation de numeros ok");
+                
+                //on cree le groupe
+                if(isset($contactTo['autre_groupe']))
+                {
+                    if(strlen($contactTo['autre_groupe'])<= 0)
+                        throw new \Exception('veuillez spécifier le nom du groupe');
+                    $groupe = new Groupe();
+                    $groupe['nom'] = $contactTo['autre_groupe'];
+                    $groupeManager->create($groupe);
+                    
+                }else if(isset($contactTo['groupe']))
+                {
+                    $groupe = $groupeManager->get($contactTo['groupe']);
+                    if($groupe['id'] <= 0){
+                        throw new \Exception('groupe invalide ' . $http->postData('groupeContact'));
+                    }
+                }else{
+                    throw new \Exception('veuillez spécifier le groupe');
+                }
+
+
+                //on sauvegarder le groupe
+                $contactHasGroupe = new ContactHasGroupe();
+                $contactHasGroupe['contact'] = $contact;
+                $contactHasGroupe['groupe'] = $groupe;
+
+                $contactHasGroupeManager->create($contactHasGroupe);
+                //Utilities::print_s("lien entre contact et groupe  ok");
+
+                $_SESSION['success_message']="Contact cree avec succes!";
+                $this->managers->commit();
+
+                $this->app()->httpResponse()->redirect('home/contacts/');
+
         
-        //on passe au mapping sur le groupe
-        //recherche de l'id du contact
-        $idcontact=$manager->create($contact);;
-        //var_dump($idcontact);
-        //recherche de l'id du groupe
-        $manager=$this->managers->getManagerOf('Groupe');
-        $r=$manager->find(array('nomGroupe'=>$contactTo['groupe']));
-        $idgroupe=$r[0]->getId();
-        
-        $manager1 = $this->managers->getManagerOf('ContactHasGroupe');
-        $contacthasgroupe = new ContactHasGroupe();
-        $contacthasgroupe['idcontact'] = $idcontact;
-        $contacthasgroupe['idgroupe'] = $idgroupe;
-        $manager1->create($contacthasgroupe);
+            }
+        }catch(\Exception $e){
+            $this->managers->roolBack();
+            $erreur[] = $e->getMessage();
+        }
     }
 
 }
