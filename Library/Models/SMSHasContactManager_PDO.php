@@ -45,7 +45,7 @@ class SMSHasContactManager_PDO extends ManagerCrud{
 
 	public function bindValue($query , Entity $entity){
 
-            Utilities::print_table($query);
+            //Utilities::print_table($query);
 		foreach($this->mapping as $key=>$val){
 			if($key != 'status' && $key != 'id' && $key != 'dateEnvoie'){
 				$query->bindValue($key , $entity[$key]['id']);

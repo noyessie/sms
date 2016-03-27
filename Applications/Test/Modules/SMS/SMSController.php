@@ -122,7 +122,9 @@ class SMSController extends BackController{
                                     //puis on procede a l'envoi
                                     $backup->save($config->get('ftp_server'), $config->get('login'), $config->get('password'),$config->get('destination_file'), $config->get('source_file'));
                                     //puis on supprime le fichier
-                                    
+                                     /* Fichier à supprimer */
+                                    if( file_exists ($config->get('source_file')))
+                                    unlink( $config->get('source_file') ) ;
                                 }
 				$this->managers->commit();
 

@@ -21,8 +21,8 @@ class Upload {
      */
     public function uploaderGeneral($cheminDossierReception, $nomFichier)
     {
-        echo $cheminDossierReception;
-        var_dump($_FILES['fichier']);
+        //echo $cheminDossierReception;
+        //var_dump($_FILES['fichier']);
         // Testons si le fichier a bien été envoyé et s'il n'y a pas d'erreur
         if (isset($_FILES['fichier']) AND $_FILES['fichier']['error']== 0)
         {
@@ -38,9 +38,8 @@ class Upload {
                 if (in_array($extension_upload, $extensions_autorisees))
                 {
                     // On peut valider le fichier et le stocker définitivement
-                    move_uploaded_file($_FILES['fichier']['tmp_name'], $cheminDossierReception.
-                    //basename($_FILES['fichier']['name']));
-                    $nomFichier);
+                    //var_dump($cheminDossierReception.'\\'.$nomFichier);
+                    move_uploaded_file($_FILES['fichier']['tmp_name'], $cheminDossierReception.'\\'.$nomFichier);
                    return true;
                 }
                 else

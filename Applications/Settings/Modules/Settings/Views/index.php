@@ -43,7 +43,7 @@
                 </div>
                 <div class="form-group">
                     <label for="senderAPI">
-                        Nom de l'expéditeur:
+                        Nom de l'expediteur:
                     </label>
                     <input class="form-control" type="text" value="<?= $senderAPI; ?>" disabled>
                     <input class="form-control" type="text" name="senderAPI" value="">

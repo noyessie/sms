@@ -14,4 +14,14 @@ class GroupeManager_PDO extends ManagerCrud{
 
 		$this->table_name = 'groupe';
 	}
+        
+        public function getName($name){
+		$class = $this->entity_class();
+		$result = $this->find(array('nom'=>$name));
+		if(count($result)>0){
+			return $result[0];
+		}else{
+			return new $class;
+		}
+	}
 }

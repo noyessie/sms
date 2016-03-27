@@ -1,4 +1,5 @@
     <title><?= isset($title) ? $title : 'SMS' ?></title>
+    <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="/sms/Web/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="/sms/Web/font-awesome/css/font-awesome.min.css" />
     <link rel="stylesheet" type="text/css" href="/sms/Web/css/local.css" />

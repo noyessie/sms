@@ -17,7 +17,7 @@
                 <ul class="nav navbar-nav side-nav">
                     <li><a href="/sms/home/"><i class="fa fa-home"></i> Home</a></li>
                     <li><a href="/sms/test/message/"><i class="fa fa-envelope"></i> Messagerie </a></li>
-                    <li><a href="/sms/home/contacts/"><i class="fa fa-users"></i> Contacts </a></li>
+                    <li><a href="/sms/test/contact/"><i class="fa fa-users"></i> Contacts </a></li>
                     <li><a href="/sms/creation/carnet/index"><i class="fa fa-pencil"></i> Gerer le carnet d'adresses</a></li>
                     <li><a href="/sms/settings/"><i class="fa fa-cog"></i> Parametres </a></li>
                     <li><a href="/sms/authentification/logout/"><i class="fa fa-power-off"></i> Se deconnecter </a></li>

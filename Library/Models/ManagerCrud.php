@@ -99,7 +99,7 @@ class ManagerCrud extends Manager
 		try{
     		$id =  $query->execute() ? $this->dao->lastInsertId() : 0;
 		}catch(\Exception $e){
-			Utilities::print_table($query);
+			//Utilities::print_table($query);
 			throw new \Exception("Query faill !!! " . $e->getMessage());
 		}    
 		$entity['id'] = $id;

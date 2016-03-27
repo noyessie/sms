@@ -1,4 +1,5 @@
 RewriteEngine on
+
 RewriteBase /sms/
 
 RewriteRule ^creation/(.*)$ index.php?app=Creation [QSA,L]

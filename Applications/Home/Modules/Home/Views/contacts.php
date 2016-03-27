@@ -26,6 +26,10 @@
         <th>
         <center>Tel3</center>
         </th>
+        <th>
+        <center>Action</center>
+        </th>
+        
         </tr>
         </thead>
         <tbody>
@@ -69,7 +73,7 @@
                         }
                     }
                     ?>
-                    
+                    <td><center><span class="pull-right"><i class="fa fa-trash-o text-danger"></i><a href="/sms/test/<?=$c['id']?>/delete/"> supprimer </a></span></center></td>
                     </tr>
             <?php
                     $i++;
