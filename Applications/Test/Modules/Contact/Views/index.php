@@ -1,3 +1,6 @@
+<h1><a href="../../creation/carnet/contact"><i class="fa fa-plus-circle"></i> Nouveau contact...</a></h1>
+<br>
+<br>
 <center><h2>liste des contacts</h2></center>
     <br>
     
@@ -12,12 +15,6 @@
         <center>Nom</center>
         </th>
         <th>
-        <center>Prenom</center>
-        </th>
-        <th>
-        <center>Email</center>
-        </th>
-        <th>
         <center>Tel1</center>
         </th>
         <th>
@@ -25,6 +22,9 @@
         </th>
         <th>
         <center>Tel3</center>
+        </th>
+        <th>
+        <center>Groupe</center>
         </th>
         <th>
         <center>Action</center>
@@ -41,8 +41,6 @@
                         <tr>
                         <td><center><?= $i + 1 ?></center></td>
                         <td><center><?= $c['nom'] ?></center></td>
-                        <td><center><?= $c['prenom'] ?></center></td>
-                        <td><center><?= $c['email'] ?></center></td>
                     <?php
                     foreach ($c['numeros'] as $n) :
                         $temp='m';
@@ -55,7 +53,7 @@
                     endforeach;
                     if($c['numeros']==null || count($c['numeros'])<3)
                     {
-                        $i=0;
+                        $j=0;
                         $t=0;
                         //var_dump($c);
                         if($c['numeros']==null)
@@ -65,14 +63,25 @@
                         {
                             $t=count($c['numeros']);
                         }
-                        for($i=0; $i<3-$t; $i++)
+                        for($j=0; $j<3-$t; $j++)
                         {
                     ?> 
                     <td><center></center></td>
                     <?php
                         }
                     }
-                    ?>
+					$contactHasGroupe = $managercontactgroupe->find(array('contact'=>$c));
+					if(isset($contactHasGroupe[0])){
+					$cg=$contactHasGroupe[0];
+					$groupe=$cg['groupe'];
+					}else
+                                        {
+                                            $groupe['nom']='Public';
+                                        }
+                                        
+					//var_dump($cg);
+					?>
+					<td><center><?=$groupe['nom']?></center></td>
                     <td><center><span class="pull-right"><i class="fa fa-trash-o text-danger"></i><a href="/sms/test/contact/<?=$c['id']?>/delete/"> supprimer </a></span></center></td>
                     </tr>
             <?php

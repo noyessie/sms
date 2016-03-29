@@ -74,7 +74,7 @@ class SMSController extends BackController{
 				//on parcours les contacts, et on remplace chaque truc par ça correspondace, on obtient
 				//les message cors
 				$message_envoyer = []; 
-				
+				$cp=0;
 				foreach($contacts as $contact){
 					$corps = $sms['corps'];
 					//on parcours les numeros du contact
@@ -90,17 +90,15 @@ class SMSController extends BackController{
 						$corps = str_replace($this->tag['email'], $contact['email'] , $corps);
 
 						if(preg_match('/(\\(.*\\))/', $corps, $matches)){
-							throw new \Exception('invalid tag used');
+							throw new \Exception('Tag invalide utilisé');
 						}
-
 						//envoie du message
 						if($envoie){
 							//Utilities::print_s('envoie du message : ' . $corps);
 							$config=new \Library\Config($this->app());
 							$sms_status = false;
-                                                        $sms_status = Api::envoi($config->get('usernameAPI') , $config->get('passwordAPI') , $config->get('senderAPI') , $corps , array($numero['numero'])) == Api::SUCCESS ? true : false;
-                                                
-						}
+                                                        $sms_status = Api::envoi($config->get('usernameAPI') , $config->get('passwordAPI') , $config->get('senderAPI') , $corps , array(trim($numero['numero']))) == Api::SUCCESS ? true : false;
+                                                }
 						$message_envoyer[] = $corps;
 					}
 					$sms_has_contact = new SMSHasContact();
@@ -109,22 +107,22 @@ class SMSController extends BackController{
 					$sms_has_contact['status'] = $sms_status ? 1: 0;
 					if($sms_status&&$envoie){
 						$sms_has_contact['dateEnvoie'] = time();
-                                                //on pro
+                                                $cp++;
                                         }
 					
 					$smsHasContactManager->create($sms_has_contact);
 				}
-                                if($sms_status&&$envoie){
+				if($cp>0 && $envoie){
 				    //on procede au backup
                                     $backup=new Backup();
                                     $config=new \Library\Config($this->app());
-                                    $backup->backup($config->get('server_sql'), $config->get('username'), $config->get('nom_de_la_base'), $config->get('mot_de_passe'), $config->get('cheminSauvegardeTempBD'));
+                                    $backup->backup(0, $config->get('server_sql'), $config->get('username'), $config->get('nom_de_la_base'), $config->get('mot_de_passe'), $config->get('cheminSauvegardeTempBD'));
                                     //puis on procede a l'envoi
-                                    $backup->save($config->get('ftp_server'), $config->get('login'), $config->get('password'),$config->get('destination_file'), $config->get('source_file'));
+                                    $backup->save($config->get('ftp_server'), $config->get('ftp_login'), $config->get('ftp_password'),$config->get('ftp_destination_file'), $config->get('ftp_source_file'));
                                     //puis on supprime le fichier
                                      /* Fichier à supprimer */
-                                    if( file_exists ($config->get('source_file')))
-                                    unlink( $config->get('source_file') ) ;
+                                    if( file_exists ($config->get('ftp_source_file')))
+                                    unlink( $config->get('ftp_source_file') ) ;
                                 }
 				$this->managers->commit();
 

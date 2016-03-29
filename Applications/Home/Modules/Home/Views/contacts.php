@@ -12,12 +12,6 @@
         <center>Nom</center>
         </th>
         <th>
-        <center>Prenom</center>
-        </th>
-        <th>
-        <center>Email</center>
-        </th>
-        <th>
         <center>Tel1</center>
         </th>
         <th>
@@ -41,8 +35,6 @@
                         <tr>
                         <td><center><?= $i + 1 ?></center></td>
                         <td><center><?= $c['nom'] ?></center></td>
-                        <td><center><?= $c['prenom'] ?></center></td>
-                        <td><center><?= $c['email'] ?></center></td>
                     <?php
                     foreach ($c['numeros'] as $n) :
                         $temp='m';

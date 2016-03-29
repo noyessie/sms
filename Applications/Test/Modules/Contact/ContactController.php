@@ -10,7 +10,9 @@ class ContactController extends BackController{
 	
 	public function executeIndex(HTTPRequest $http){
 		$manager = $this->managers->getManagerOf('Contact');
+		$manager1 = $this->managers->getManagerOf('ContactHasGroupe');
 		$this->page()->addVar('contacts' , $manager->find());
+		$this->page()->addVar('managercontactgroupe' , $manager1);
 
 	}
 
@@ -20,7 +22,6 @@ class ContactController extends BackController{
 			$manager = $this->managers->getManagerOf('Contact');
 			$numeroManager = $this->managers->getManagerOf('Numero');
 			$contact = new Contact();
-
 			$contact['nom'] = $http->postData('nom');
 			$contact['prenom'] = $http->postData('prenom');
 			$contact['email'] = $http->postData('email');
@@ -29,7 +30,7 @@ class ContactController extends BackController{
 			
 			$numeros = $http->postData('numeros');
 
-			Utilities::print_table($numeros);
+			//Utilities::print_table($numeros);
 			foreach($numeros as $numero){
 				$num = new Numero();
 				$num['idContact'] = $id;

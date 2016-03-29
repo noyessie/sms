@@ -4,11 +4,48 @@
     <?php endif; ?>
     <br>
     <br>
+        <div class="row">
+        <div class="col-lg-6">
+            <h3>Uploader un fichier de contacts:</h3>
+            D'abord, selectionner un groupe:
+            <form action="/sms/creation/carnet/upload/contacts" method="post" id="form_uploadContact" name="form_uploadContact"
+                  enctype="multipart/form-data" onclick="verifAutreUploadContact()">
+                <input type="hidden" name="create">
+
+                <div class="form-group">
+                    <label for="groupeUploadContact">
+                        Groupe:
+                    </label>      
+                    <select name="groupeUploadContact" id="groupeUploadContact" class="form-control">
+                        <?php
+                        foreach ($groups as $group):
+                            $groupName = $group->getNom();
+                            ?>
+                            <option value="<?= $groupName; ?>"><?= $groupName; ?></option>		
+                        <?php endforeach; ?>
+                    </select>
+                    <p id="autreUploadGroupe" style="display:none; color:blue">
+                        Veuillez entrer la nouvelle valeur ici:
+                        <input type="text" name="inputAutreUploadGroupeContact" id="inputAutreUploadGroupeContact" class="form-control" style="color:black" value="">
+                    </p>
+
+                </div>
+                <div class="form-group">
+                    Selectionner un fichier à upload: <br />
+
+                    <input type="file" name="fichier" size="50" />
+
+                </div>
+                <input type="submit" class="btn btn-primary" value="Enregistrer"/>
+            </form>
+        </div>
+
     <div class="row">
         <div class="col-lg-6">
-            Ou alors, creer un contact:
+            <h3>Ou bien, creer un contact :</h3>
             <form method="post" name="form_contact" id="form_contact" action="/sms/creation/carnet/contact" onclick="verifAutreContact()">
                 <input type="hidden" name="create">
+
                 <div class="form-group">
                     <label for="nom">
                         Nom:
@@ -50,7 +87,7 @@
                     <label for="number1">
                         Tel1:
                     </label> 
-                    <input class="form-control" id="number1" type="number" name="numero[]" value="">
+                    <input class="form-control" id="number1" type="number" name="numero[]" value="" required>
                 </div>
                 <div class="form-group">
                     <label for="number2">
@@ -66,41 +103,6 @@
                 </div>
                 <input class="btn btn-primary" type="submit" value="Creer">
             </form>    
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-6">
-            <h3>Ou bien, uploader un fichier de contacts:</h3>
-            D'abord, selectionner un groupe:
-            <form action="/sms/creation/carnet/upload/contacts" method="post" id="form_uploadContact" name="form_uploadContact"
-                  enctype="multipart/form-data" onclick="verifAutreUploadContact()">
-                <div class="form-group">
-                    <label for="groupeUploadContact">
-                        Groupe:
-                    </label>      
-                    <select name="groupeUploadContact" id="groupeUploadContact" class="form-control">
-                        <?php
-                        foreach ($groups as $group):
-                            $groupName = $group->getNom();
-                            ?>
-                            <option value="<?= $group['id'] ?>"><?= $groupName; ?></option>		
-                        <?php endforeach; ?>
-                        <option value="value0"> Autre </option>
-                    </select>
-                    <p id="autreUploadGroupe" style="display:none; color:blue">
-                        Veuillez entrer la nouvelle valeur ici:
-                        <input type="text" name="inputAutreUploadGroupeContact" id="inputAutreUploadGroupeContact" class="form-control" style="color:black" value="">
-                    </p>
-
-                </div>
-                <div class="form-group">
-                    Selectionner un fichier à upload: <br />
-
-                    <input type="file" name="fichier" size="50" />
-
-                </div>
-                <input type="submit" class="btn btn-primary" value="Enregistrer"/>
-            </form>
         </div>
     </div>   
 </div>

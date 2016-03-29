@@ -19,8 +19,7 @@
                             ?>
                             <option value="<?= $groupName; ?>"><?= $groupName; ?></option>		
                         <?php endforeach; ?>
-                        <option value="value0"> Autre </option>
-                    </select>
+                     </select>
                     <p id="autreUploadGroupe" style="display:none; color:blue">
                         Veuillez entrer la nouvelle valeur ici:
                         <input type="text" name="inputAutreUploadGroupeContact" id="inputAutreUploadGroupeContact" class="form-control" style="color:black" value="">

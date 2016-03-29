@@ -9,7 +9,7 @@
 	
 	
 	
-	<define var="ftp_server" value="localhost"/>
+	<define var="ftp_server" value="ftp.entreprise.net16.net"/>
 	<define var="ftp_login" value="a6698046"/>
 	<define var="ftp_password" value="000webhost"/>
 	<define var="ftp_destination_file" value="/public_html/sql3.sql"/>

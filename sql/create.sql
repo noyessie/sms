@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS contact(
   idcontact INT AUTO_INCREMENT,
   nom VARCHAR(45) NOT NULL,
   prenom VARCHAR(45),
-  adressemail VARCHAR(200) UNIQUE,
+  adressemail VARCHAR(200),
   CONSTRAINT pk_contact PRIMARY KEY(idcontact)
 );
 
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS groupe (
 
 CREATE TABLE IF NOT EXISTS numero (
   idnumero INT AUTO_INCREMENT,
-  numero VARCHAR(100) NOT NULL UNIQUE,
+  numero VARCHAR(100) NOT NULL,
   contact_idcontact INT ,
   CONSTRAINT pk_numero PRIMARY KEY(idnumero),
   CONSTRAINT fk_numero_contactIdcontact_contact FOREIGN KEY (contact_idcontact) REFERENCES contact(idcontact) ON DELETE CASCADE ON UPDATE CASCADE
