@@ -10,10 +10,24 @@ class Api{
     const NO_RECIPIENTS = "NO_RECIPIENTS";
     const GENERAL_ERROR = "GENERAL_ERROR";
 
+protected static function testNumber($recipients){
+
+    $result = array();
+
+    foreach ($recipients as $key => $value) {
+        if(preg_match("/^(00237|237)?(6)?([256789][0-9]{7})$/" , str_replace(" ", "", $value) , $matches)){
+            $result[] = "002376" . $matches[3];
+        }
+        return $result;
+    }
+}
+
 public static function envoi($username, $password, $sender, $body, $recipients) {
     // GlobexCamSMS's POST URL
     $postUrl = "http://193.105.74.59/api/sendsms/xml";
     // XML-formatted data
+
+    $recipients = Api::testNumber($recipients);
 
     $xmlString = '<SMS>
         <authentification>
