@@ -15,7 +15,7 @@ protected static function testNumber($recipients){
     $result = array();
 
     foreach ($recipients as $key => $value) {
-        if(preg_match("/^(00237|237)?(6)?([256789][0-9]{7})$/" , $value , $matches)){
+        if(preg_match("/^(00237|237)?(6)?([256789][0-9]{7})$/" , str_replace(" ", "", $value) , $matches)){
             $result[] = "002376" . $matches[3];
         }
         return $result;
