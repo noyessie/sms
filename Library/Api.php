@@ -54,7 +54,7 @@ public static function envoi($username, $password, $sender, $body, $recipients) 
     }
     
     
-    if($objresponse->status > 0)
+    if($objresponse->status >= 0)
     {
         return Api::SUCCESS;
     }else

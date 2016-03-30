@@ -71,7 +71,8 @@
                         }
                     }
 					$contactHasGroupe = $managercontactgroupe->find(array('contact'=>$c));
-					if(isset($contactHasGroupe[0])){
+//					var_dump($contactHasGroupe);
+                                        if(isset($contactHasGroupe[0])){
 					$cg=$contactHasGroupe[0];
 					$groupe=$cg['groupe'];
 					}else

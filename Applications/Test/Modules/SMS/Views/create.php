@@ -8,7 +8,8 @@
 <form action="" method="post" accept-charset="utf-8">
 	<input type="hidden" name = "create"/>
 	<label for="groupe">Selectionnez le groupe : </label>
-	<select name="groupe" id="">
+	<select name="groupe" id="" required>
+		<option></option>
 		<?php foreach($groupes as $g):?>
 			<option value="<?=$g['id']?>"><?=$g['nom']?></option>
 		<?php endforeach; ?>

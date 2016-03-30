@@ -337,6 +337,7 @@ class CarnetController extends BackController {
                 }else if(isset($contactTo['groupe']))
                 {
                     $groupe = $groupeManager->getName($contactTo['groupe']);
+                    var_dump($groupe);
                     if($groupe['id'] <= 0){
                         throw new \Exception('groupe invalide ' . $contactTo['groupe']);
                     }
@@ -351,7 +352,7 @@ class CarnetController extends BackController {
 
                 
 				//Utilities::print_s("creation ");
-				//var_dump($contactHasGroupeManager->create($contactHasGroupe));
+		$contactHasGroupeManager->create($contactHasGroupe);
                 $this->managers->commit();
                 return true;
                 
@@ -362,7 +363,7 @@ class CarnetController extends BackController {
         }catch(\Exception $e){
             $this->managers->roolBack();
             $erreur[] = $e->getMessage();
-            Utilities::print_table($erreur);
+            //Utilities::print_table($erreur);
             return false;
         }
     }

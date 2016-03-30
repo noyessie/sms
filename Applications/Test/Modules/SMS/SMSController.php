@@ -97,7 +97,14 @@ class SMSController extends BackController{
 							//Utilities::print_s('envoie du message : ' . $corps);
 							$config=new \Library\Config($this->app());
 							$sms_status = false;
-                                                        $sms_status = Api::envoi($config->get('usernameAPI') , $config->get('passwordAPI') , $config->get('senderAPI') , $corps , array(trim($numero['numero']))) == Api::SUCCESS ? true : false;
+                                                        /*var_dump($config->get('usernameAPI'));
+                                                        var_dump($config->get('passwordAPI'));
+                                                        var_dump($config->get('senderAPI'));
+                                                        var_dump($corps);
+                                                        var_dump(array(trim($numero['numero'])));*/
+                                                        if()
+                                                        var_dump(Api::envoi($config->get('usernameAPI') , $config->get('passwordAPI') , $config->get('senderAPI') , $corps , array(trim('00237'.$numero['numero']))));
+                                                        //$sms_status = A*pi::envoi($config->get('usernameAPI') , $config->get('passwordAPI') , $config->get('senderAPI') , $corps , array(trim('00237'.$numero['numero']))) == Api::SUCCESS ? true : false;
                                                 }
 						$message_envoyer[] = $corps;
 					}
@@ -112,7 +119,7 @@ class SMSController extends BackController{
 					
 					$smsHasContactManager->create($sms_has_contact);
 				}
-				if($cp>0 && $envoie){
+				/*if($cp>0 && $envoie){
 				    //on procede au backup
                                     $backup=new Backup();
                                     $config=new \Library\Config($this->app());
@@ -120,13 +127,13 @@ class SMSController extends BackController{
                                     //puis on procede a l'envoi
                                     $backup->save($config->get('ftp_server'), $config->get('ftp_login'), $config->get('ftp_password'),$config->get('ftp_destination_file'), $config->get('ftp_source_file'));
                                     //puis on supprime le fichier
-                                     /* Fichier à supprimer */
+                                      Fichier à supprimer 
                                     if( file_exists ($config->get('ftp_source_file')))
                                     unlink( $config->get('ftp_source_file') ) ;
-                                }
+                                }*/
 				$this->managers->commit();
 
-				$this->app()->httpResponse()->redirect('test/message/');
+				//$this->app()->httpResponse()->redirect('test/message/');
 				
 			}
 		}catch(\Exception $e){

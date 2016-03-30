@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS user(
 #-- creation de la table user
 CREATE TABLE IF NOT EXISTS contact(
   idcontact INT AUTO_INCREMENT,
-  nom VARCHAR(45) NOT NULL,
+  nom VARCHAR(45),
   prenom VARCHAR(45),
   adressemail VARCHAR(200),
   CONSTRAINT pk_contact PRIMARY KEY(idcontact)

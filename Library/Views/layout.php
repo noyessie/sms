@@ -16,6 +16,7 @@
         <div id="page-wrapper">
             
     <?php 
+    
     if (isset($_SESSION['success_message'])) : ?>
         
         <div class="alert alert-success">

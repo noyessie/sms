@@ -28,7 +28,12 @@ class HomeController extends BackController {
             $flag = false;
             $tempDate = explode(' ', $s->getSms()->getDateEnregistrement());
             //var_dump($tabResults);
-            foreach ($tabResults as $r => $value) {
+            if(!array_key_exists($tempDate[0], $tabResults))
+            {
+                $tabResults['' . $tempDate[0] . ''] = array();
+                $nbE=$nbN=0;
+            }
+            /*foreach ($tabResults as $r => $value) {
                 if (explode(' ', $value['dateBrut'])[0] == $tempDate[0]) {
                     $flag = true;
                     break;
@@ -39,7 +44,7 @@ class HomeController extends BackController {
                 //on l'augmente
                 $tabResults['' . $tempDate[0] . ''] = array();
                 $nbE=$nbN=0;
-            }
+            }*/
             $temp=$tabResults['' . $tempDate[0] . ''];
             if(isset($temp['nbSMSN']))
             {
@@ -89,7 +94,7 @@ class HomeController extends BackController {
             }
             $tabResults['' . $tempDate[0] . ''] = array('dateBrut' => $tempDate[0], 'date' => $j . '-' . $m . '-' . $y, 'nbSMSE' => $nbE, 'nbSMSN' => $nbN);
         }
-        // var_dump($tabResults);
+         //var_dump($tabResults);
         $this->page()->addVar('results', $tabResults);
         $this->page()->getGeneratedPage();
     }
@@ -107,6 +112,9 @@ class HomeController extends BackController {
             //echo'on est net';
             if (explode(' ', $s['dateEnregistrement'])[0] == $http->getData('date')) {
                 $tabSMSC = $managerSMSC->find(array('sms' => $s['id']));
+        //        echo 'tabsmsc';
+          //      var_dump($tabSMSC);
+                if(isset($tabSMSC[0])){
                 $sms = $tabSMSC[0];
                 if ($sms['dateEnvoie'] == null) {
                     //  echo 'il faut envoyer';
@@ -117,7 +125,10 @@ class HomeController extends BackController {
                     //       var_dump($contact);
                     //     var_dump($numeros);
                     foreach ($numeros as $n) {
-                        if ($api->envoi($config->get('usernameAPI'), $config->get('passwordAPI'), $config->get('senderAPI'), $s['corps'], $n) == 'success') {
+                        var_dump($s['corps']);
+                        var_dump(array(trim($n['numero'])));
+                        var_dump($api->envoi($config->get('usernameAPI'), $config->get('passwordAPI'), $config->get('senderAPI'), $s['corps'], array(trim($n['numero']))));
+                        if ($api->envoi($config->get('usernameAPI'), $config->get('passwordAPI'), $config->get('senderAPI'), $s['corps'], array(trim($n['numero']))) == 'success') {
                             //on enregistre la date denvoie
                             $smshascontact = new \Library\Entities\SMSHasContact();
                             $smshascontact['id'] = $sms['id'];
@@ -134,13 +145,19 @@ class HomeController extends BackController {
                     //echo 'puis si oui enregistrer la date Envoie';
                 }
                 //var_dump($sms);
+                }
             }
         }
+        $session=new \Library\Session();
+        $session=$this->app()->session();
         if ($comp != 0) {
             $_SESSION['success_message'] = 'renvois de sms effectues avec succes!';
+            $session->setAttribute('success_message', 'renvois de sms effectues avec succes!');
         } else {
-            $_SESSION['alert_message'] = 'Veuillez ressayer les renvois plutard!';
+            $_SESSION['info_message'] = 'Veuillez ressayer les renvois plutard!';
+            $session->setAttribute('info_message', 'Veuillez ressayer les renvois plutard!');
         }
+        
         $this->executeIndex($http);
         //$this->app()->httpResponse()->redirect('home/');
         //echo 'fin';

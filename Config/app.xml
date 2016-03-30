@@ -17,5 +17,5 @@
 	<define var="cheminSauvegardeTempBD" value="C:\wamp\www\sms\sql3.sql"/>
 	
 <define var="cheminDossierReception" value="C:\wamp\www\sms\Applications\Creation\Modules\Carnet\Files"/>
-<define var="nomFichier" value="contacts"/><define var="usernameAPI" value="demo-euro"/>
-<define var="passwordAPI" value="demo-euro"/><define var="senderAPI" value="entreprise"/></definitions>
+<define var="nomFichier" value="contacts"/>
+<define var="passwordAPI" value="ReSdGVCO"/><define var="usernameAPI" value="KASSAP"/><define var="senderAPI" value="AUTO-ECOLE-KASSAP"/></definitions>
