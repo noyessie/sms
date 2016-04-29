@@ -46,7 +46,13 @@
                         Nom de l'expediteur:
                     </label>
                     <input class="form-control" type="text" value="<?= $senderAPI; ?>" disabled>
-                    <input class="form-control" type="text" name="senderAPI" value="">
+                    <?php
+                        if(trim($senderAPI) == "ENTREPRISE"){
+                    ?>
+                        <input class="form-control" type="text" name="senderAPI" value="">
+                    <?php
+                    }
+                    ?>
                 </div>
                 
                 <input class="btn btn-primary" type="submit" value="Modifier">
