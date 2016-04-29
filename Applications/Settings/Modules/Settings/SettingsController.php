@@ -4,7 +4,7 @@ use Library\BackController;
 use Library\HTTPRequest;
 use Library\Entities\User;
 use Library\Controls;
-use Library\Config;
+use Config\Config;
 use Library\Api;
 class SettingsController extends BackController{
 	public function executeIndex(HTTPRequest $http){
@@ -19,6 +19,7 @@ class SettingsController extends BackController{
             $this->page()->addVar('passwordAPI', $config->get('passwordAPI'));
             //senderAPI
             $this->page()->addVar('senderAPI', $config->get('senderAPI'));
+            
             
             $this->page()->getGeneratedPage();
         }
