@@ -180,7 +180,7 @@ class CarnetController extends BackController {
                 //
                 ////var_dump($elem);
                 if (!$this->validationContact($elem)) {
-				echo 'echec validation';
+					echo 'echec validation';
                     $flag = true;
                     break;
                 }
@@ -206,7 +206,7 @@ class CarnetController extends BackController {
                     $contactTo['autre_groupe']=$http->postData('inputAutreUploadGroupe');
                     //on enregistre le nouveau groupe
                 }
-                Utilities::print_table($contactTo);
+               // Utilities::print_table($contactTo);
                 
                 if(!$this->saveContact($contactTo, $http))
                 {
@@ -244,8 +244,10 @@ class CarnetController extends BackController {
     private function validationContact($contact) {
         $controls = new Controls();
         $erreurs = array();
+		//echo $contact['nom'];
         if (isset($contact['nom'])) {
-            $erreurs[] = $controls->validationChamp($contact['nom']);
+            //$erreurs[] = $controls->validationChamp($contact['nom']);
+			//echo 'hum';
             ////var_dump($erreurs);
         } else if (isset($contact['prenom'])) {
             //$erreurs[]=$controls->validationChamp($contact['prenom'])
@@ -254,7 +256,7 @@ class CarnetController extends BackController {
             //$erreurs[]=$controls->validationEmail($contact['email']);
             ////var_dump($erreurs);
         } else if (isset($contact['numero1'])) {
-            $erreurs[]=$controls->validationNombre($contact['numero1']);
+            //$erreurs[]=$controls->validationNombre($contact['numero1']);
             ////var_dump($erreurs);
         } else if (isset($contact['numero2'])) {
             //$erreurs[]=$controls->validationNombre($contact['numero2']);
@@ -274,7 +276,7 @@ class CarnetController extends BackController {
 
         if(strpos(strtoupper($contactTo['nom']), 'NOM')!==false)
         {
-            echo 'ta grosse tete';
+           // echo 'ta grosse tete';
             return true;
         }
         
@@ -292,8 +294,9 @@ class CarnetController extends BackController {
 
                 //on cree le contact
                 $contact = new Contact();
-                $contact['nom'] = $contactTo['nom'];
+                $contact['nom'] = trim($contactTo['nom']);
                 $erreur[] = $control->validationChamp($contact['nom']);
+				//var_dump($contact);
                 $contact['prenom'] = '';
                 $contact['email'] = '';
 				//var_dump($contact);
@@ -305,6 +308,8 @@ class CarnetController extends BackController {
                 //on enregister les numeros
                 $numeros = array();
                 $numeros[] = $contactTo['numero1'];
+				//var_dump($contactTo);
+				
                 if(isset($contactTo['numero2']))
                 {
                     $numeros[]=$contactTo['numero2'];
@@ -324,7 +329,6 @@ class CarnetController extends BackController {
 //var_dump($contactTo);
 				
                 //Utilities::print_s("creation de numeros ok");
-                
                 //on cree le groupe
                 if(isset($contactTo['autre_groupe']))
                 {
@@ -337,7 +341,7 @@ class CarnetController extends BackController {
                 }else if(isset($contactTo['groupe']))
                 {
                     $groupe = $groupeManager->getName($contactTo['groupe']);
-                    var_dump($groupe);
+                    //var_dump($groupe);
                     if($groupe['id'] <= 0){
                         throw new \Exception('groupe invalide ' . $contactTo['groupe']);
                     }
@@ -352,7 +356,7 @@ class CarnetController extends BackController {
 
                 
 				//Utilities::print_s("creation ");
-		$contactHasGroupeManager->create($contactHasGroupe);
+				$contactHasGroupeManager->create($contactHasGroupe);
                 $this->managers->commit();
                 return true;
                 

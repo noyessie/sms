@@ -15,7 +15,7 @@ class HomeController extends BackController {
         //on commence par recuperer toutes les dates d'envoi
         $manager = $this->managers->getManagerOf('SMSHasContact');
         $tabSMS = $manager->find();
-
+/*
         //ensuite on recupere le nombre de sms par date d'envoie
         //tous les sms qui ont une date d'envoie null ne sont pas envoyés mais enregistrees
         $tabResults = array();
@@ -44,7 +44,7 @@ class HomeController extends BackController {
                 //on l'augmente
                 $tabResults['' . $tempDate[0] . ''] = array();
                 $nbE=$nbN=0;
-            }*/
+            }
             $temp=$tabResults['' . $tempDate[0] . ''];
             if(isset($temp['nbSMSN']))
             {
@@ -94,7 +94,9 @@ class HomeController extends BackController {
             }
             $tabResults['' . $tempDate[0] . ''] = array('dateBrut' => $tempDate[0], 'date' => $j . '-' . $m . '-' . $y, 'nbSMSE' => $nbE, 'nbSMSN' => $nbN);
         }
-         //var_dump($tabResults);
+         //var_dump($tabResults);**/
+		 $tabResults=array();
+		 
         $this->page()->addVar('results', $tabResults);
         $this->page()->getGeneratedPage();
     }
@@ -125,9 +127,9 @@ class HomeController extends BackController {
                     //       var_dump($contact);
                     //     var_dump($numeros);
                     foreach ($numeros as $n) {
-                        var_dump($s['corps']);
-                        var_dump(array(trim($n['numero'])));
-                        var_dump($api->envoi($config->get('usernameAPI'), $config->get('passwordAPI'), $config->get('senderAPI'), $s['corps'], array(trim($n['numero']))));
+                        //var_dump($s['corps']);
+                        //var_dump(array(trim($n['numero'])));
+                        //var_dump($api->envoi($config->get('usernameAPI'), $config->get('passwordAPI'), $config->get('senderAPI'), $s['corps'], array(trim($n['numero']))));
                         if ($api->envoi($config->get('usernameAPI'), $config->get('passwordAPI'), $config->get('senderAPI'), $s['corps'], array(trim($n['numero']))) == 'success') {
                             //on enregistre la date denvoie
                             $smshascontact = new \Library\Entities\SMSHasContact();

@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS groupe (
 
 CREATE TABLE IF NOT EXISTS numero (
   idnumero INT AUTO_INCREMENT,
-  numero VARCHAR(100) NOT NULL,
+  numero VARCHAR(100),
   contact_idcontact INT ,
   CONSTRAINT pk_numero PRIMARY KEY(idnumero),
   CONSTRAINT fk_numero_contactIdcontact_contact FOREIGN KEY (contact_idcontact) REFERENCES contact(idcontact) ON DELETE CASCADE ON UPDATE CASCADE

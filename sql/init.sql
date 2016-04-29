@@ -5,4 +5,4 @@ INSERT INTO groupe VALUE(0 , 'Public');
 INSERT INTO contact VALUE( 0 , 'inconue' , 'inconue' , '' );
 
 #-- initialisation des user
-INSERT INTO user(nom, prenom, adressemail, motdepasse) VALUE ('kassap', 'kassap', 'kassap@kassap.com', 'kassap');
+INSERT INTO user(nom, prenom, adressemail, motdepasse) VALUE ('admin', 'admin', 'admin@admin.com', 'admin');

@@ -102,9 +102,8 @@ class SMSController extends BackController{
                                                         var_dump($config->get('senderAPI'));
                                                         var_dump($corps);
                                                         var_dump(array(trim($numero['numero'])));*/
-                                                        if()
-                                                        var_dump(Api::envoi($config->get('usernameAPI') , $config->get('passwordAPI') , $config->get('senderAPI') , $corps , array(trim('00237'.$numero['numero']))));
-                                                        //$sms_status = A*pi::envoi($config->get('usernameAPI') , $config->get('passwordAPI') , $config->get('senderAPI') , $corps , array(trim('00237'.$numero['numero']))) == Api::SUCCESS ? true : false;
+                                                        //var_dump(Api::envoi($config->get('usernameAPI') , $config->get('passwordAPI') , $config->get('senderAPI') , $corps , array(trim('00237'.$numero['numero']))));
+                                                        $sms_status = Api::envoi($config->get('usernameAPI') , $config->get('passwordAPI') , $config->get('senderAPI') , $corps , array(trim($numero['numero']))) == Api::SUCCESS ? true : false;
                                                 }
 						$message_envoyer[] = $corps;
 					}
